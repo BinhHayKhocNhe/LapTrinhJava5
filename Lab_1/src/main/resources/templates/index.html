@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>My Page</title>
+</head>
+<body>
+	<h1>Danh sách nhân viên</h1>
+	<h3 th:text="${message}"></h3>
+	<ul>
+		<li th:each="profile : ${profiles}">
+			<h2>
+				Họ tên: <span th:text="${profile.fullName}"></span>
+			</h2>
+			<h3>
+				Địa chỉ: <span th:text="${profile.address}"></span>
+			</h3>
+			<h4>
+				Tuổi: <span th:text="${profile.age}"></span>
+			</h4>
+			<hr>
+		</li>
+	</ul>
+</body>
+</html>

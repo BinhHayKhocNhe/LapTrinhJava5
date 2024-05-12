@@ -16,11 +16,11 @@ public class HomeController {
 		List<Profiles> profiles = new ArrayList<>();
 		profiles.add(new Profiles("Nguyễn Văn A", "Quận 1, TP.HCM", 25));
 		profiles.add(new Profiles("Trần Thị B", "Quận 2, TP.HCM", 30));
+		profiles.add(new Profiles("Trần Thị C", "Quận 3, TP.HCM", 30));
 		profiles.add(new Profiles("Dương Minh Bình", "Bình Tân, TP.HCM", 20));
 
 		model.addAttribute("profiles", profiles);
 		return "index";
 	}
-	
 	
 }

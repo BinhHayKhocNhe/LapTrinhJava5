@@ -1,4 +1,4 @@
-package com.Lab_1.entity;
+package com.Lab_2.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Profiles {
-	private String fullName;
-	private String address;
-	private int age;
+public class Product {
+	private String name;
+	private double price;
 }

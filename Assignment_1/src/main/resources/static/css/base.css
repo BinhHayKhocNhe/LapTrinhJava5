@@ -1,0 +1,17 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+a {
+	color: inherit; /* Màu chữ sẽ được kế thừa từ phần tử cha */
+	text-decoration: none;
+}
+
+body{
+	font-family: 'Muli';
+	font-weight: normal;
+	background-color: #ffffff;
+	color: #525252;
+}

@@ -1,0 +1,63 @@
+.top-bar{
+    background-color: #61c472;
+    width: 100%;
+    padding: 7px 0;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 300;
+}
+.hotline{
+    user-select: none;
+}
+.hotline img{
+    max-width: 35px;
+}
+
+.hotline:hover{
+    color: #61c472;
+}
+
+.logo img {
+    max-width: 250px;
+}
+
+.cart i, .search i, .user i{
+    font-size: 25px;
+}
+.cart i:hover, .search i:hover, .user i:hover{
+    color: rgb(199, 90, 90);
+}
+.icon-search-button{
+    font-size: 15px !important;
+}
+
+.user ul{
+    list-style: none;
+}
+
+@media only screen and (max-width: 575.98px) {
+    .header-items{
+        width: 50%;
+    }
+}
+@media only screen and (min-width: 768px) {
+    .header-items{
+        width: 25%;
+    }
+    .header-items-logo{
+        width: 50%;
+    }
+}
+.navbar-items li{
+    padding: 12px 20px;
+}
+.navbar-items a{
+    user-select: none;
+    text-transform: uppercase;
+    font-weight: 600;   
+    word-spacing: 2px;
+}
+
+.navbar-items a:hover{
+    color:#61c472;
+}

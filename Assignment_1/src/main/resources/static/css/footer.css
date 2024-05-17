@@ -1,0 +1,13 @@
+.gallery-container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: repeat(3, 30%);
+    grid-gap: 10px;
+}
+.gallery-container .item img {
+    width: 100%;
+}
+.text-color a:hover{
+    color: red;
+}

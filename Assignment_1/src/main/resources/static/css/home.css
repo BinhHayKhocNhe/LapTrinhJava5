@@ -96,3 +96,28 @@
     -moz-transform: translateY(0%);
     -o-transform: translateY(0%);
 }
+
+
+.sub-title{
+	font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+.section-title{
+	font-size: 30px;
+	letter-spacing: 2px;
+	font-weight: 600;
+}
+
+.feature_title{
+    font-size: 18px;
+}
+.feature_explain{
+    text-align: justify;
+    font-size: 14px;
+}
+
+.feature-wrap img{
+    max-width: 60px;
+}

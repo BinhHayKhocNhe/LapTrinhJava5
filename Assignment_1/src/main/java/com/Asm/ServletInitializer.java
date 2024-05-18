@@ -1,4 +1,4 @@
-package com.Lab_2;
+package com.Asm;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

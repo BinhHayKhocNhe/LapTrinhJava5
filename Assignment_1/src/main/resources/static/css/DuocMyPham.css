@@ -1,0 +1,49 @@
+.bre {
+    color: #a8a7a4;
+}
+
+.title-DMP {
+    font-size: 1.42857em;
+    font-weight: 800;
+    color: #333333;
+    text-decoration: none;
+}
+
+.lable-DPM {
+    line-height: 38px;
+    font-size: 14px;
+    margin-right: 6px;
+    margin-bottom: 0;
+}
+
+.accordion-item{
+    border: none !important;
+}
+.border-61c472{
+    border-color:#61c472 !important;
+    border-width: 3px !important;
+}
+.fs-7{
+    font-size: smaller;
+}
+.scroll{
+    max-height: 140px;
+    overflow-y: auto;
+}
+::-webkit-scrollbar{
+    width: 10px;
+}
+::-webkit-scrollbar-track{
+    background-color: aliceblue;
+}
+::-webkit-scrollbar-thumb{
+    background-color:#61c472;
+    border-radius: 15px;
+}
+.detail-hover:hover{
+    color: #61c472;
+    transition: all .5s;
+}
+.border-dashed{
+    border-bottom: 1px dashed black;
+}

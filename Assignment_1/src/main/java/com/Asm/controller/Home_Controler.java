@@ -30,4 +30,8 @@ public class Home_Controler {
 		return "DuocMyPham";
 	}
 
+	@GetMapping("/cart.html")
+	public String cart() {
+		return "cart";
+	}
 }

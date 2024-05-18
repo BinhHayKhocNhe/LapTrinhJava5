@@ -14,6 +14,10 @@ app.config(function($routeProvider) {
 			templateUrl: "/DuocMyPham.html",
 			controller: "Controller"
 		})
+		.when("/cart", {
+			templateUrl: "/cart.html",
+			controller: "Controller"
+		})
 		.otherwise({
 			templateUrl: "/home.html",
             controller: "TourController"

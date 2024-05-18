@@ -54,9 +54,9 @@
 }
 .navbar-items a{
     user-select: none;
-    text-transform: uppercase;
     font-weight: 600;   
     word-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .navbar-items a:hover{

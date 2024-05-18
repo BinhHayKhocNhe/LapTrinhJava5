@@ -37,25 +37,26 @@
 
 @media only screen and (max-width: 575.98px) {
     .header-items{
-        width: 50%;
+        width: 50% !important;
     }
 }
 @media only screen and (min-width: 768px) {
     .header-items{
-        width: 25%;
+        width: 25% !important;
     }
     .header-items-logo{
-        width: 50%;
+        width: 50% !important;
     }
 }
+
 .navbar-items li{
     padding: 12px 20px;
 }
 .navbar-items a{
     user-select: none;
-    text-transform: uppercase;
     font-weight: 600;   
     word-spacing: 2px;
+    text-transform: uppercase;
 }
 
 .navbar-items a:hover{

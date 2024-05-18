@@ -1,13 +1,13 @@
-package com.Lab_2;
+package com.Lab_3;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Assignment1Application {
+public class Lab3Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Assignment1Application.class, args);
+		SpringApplication.run(Lab3Application.class, args);
 	}
 
 }

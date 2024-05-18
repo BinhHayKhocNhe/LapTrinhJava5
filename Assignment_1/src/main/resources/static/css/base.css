@@ -9,12 +9,12 @@ a {
 	text-decoration: none;
 }
 
-body{
-	font-family: 'Muli';
-	font-weight: normal;
+/* html, body {
+	overflow: scroll;
+}
+ */
+body {
 	background-color: #ffffff;
 	color: #525252;
 	font-family: "Mulish", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
 }

@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class Controller_Bai_2 {
 	@GetMapping("/form")
 	public String form() {
-		return "Bai_2";
+		return "form";
 	}
 
 	@PostMapping("/save/{x}")
 	public String save(@PathVariable("x") String x, @RequestParam("y") String y, Model model) {
 		model.addAttribute("x", x);
 		model.addAttribute("y", y);
-		return "Bai_2";
+		return "form";
 	}
 }

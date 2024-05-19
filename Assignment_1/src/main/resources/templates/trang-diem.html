@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+    <link rel="icon" href="https://phuongnamvina.com/img_data/images/lam-logo-ban-hang-online-dep.jpg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/src/main/resources/static/css/base.css">
+    <link rel="stylesheet" href="/src/main/resources/static/css/header.css">
+    <link rel="stylesheet" href="/src/main/resources/static/css/footer.css">
+    <link rel="stylesheet" href="/src/main/resources/static/css/DuocMyPham.css">
+    <link rel="stylesheet" href="/src/main/resources/static/css/home.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+        rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+</head>
+
+
+<body ng-app="myApp">
+    <div ng-include="'header.html'"></div>
+
+    <div class="container pt-4 pb-4">
+        <div class="align-items-center">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item bre"><a href="#">Trang Chủ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">TRANG ĐIỂM</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-11 col-md-11 col-lg-3">
+                <aside class="d-none d-lg-block">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="headingOne">
+                            <div class="accordion-button fs-5 fw-bold border-bottom border-61c472 pb-3"
+                                data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                                <span style="color: #333;" class=""><i class="bi bi-list me-1"></i> Danh mục</span>
+                            </div>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne">
+                            <div class="accordion-body">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">Dược Mỹ Phẩm</li>
+                                    <li class="list-group-item" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseTwo">
+                                        <a href="" class="">Trang Điểm</a>
+                                        <i class="bi bi-chevron-down"></i>
+                                        <ul id="collapseTwo"
+                                            class=" list-group list-group-flush accordion-collapse collapse">
+                                            <li class="list-group-item" type="button" data-bs-toggle="collapse"
+                                                data-bs-target="#collapseThree">
+                                                <a href="">Trang Điểm Mặt</a>
+                                                <i class="bi bi-chevron-down"></i>
+                                                <ul id="collapseThree"
+                                                    class=" list-group list-group-flush accordion-collapse collapse">
+                                                    <li class="list-group-item">
+                                                        <a class="nav-link " href="">Kem Dưỡng</a>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <a class="nav-link " href="">Sữa Rửa Mặt</a>
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <a class="nav-link " href="">Kem Chống Nắng</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <a class="nav-link " href="">Trang Điểm Mắt</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="list-group-item" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapseFour">
+                                        <a class="" href="">Chăm sóc</a>
+                                        <i class="bi bi-chevron-down"></i>
+                                        <ul id="collapseFour" class="collapse list-group list-group-flush">
+                                            <li class="list-group-item"><a class="nav-link " href="">Chăm Sóc
+                                                    Tóc</a></li>
+                                            <li class="list-group-item"><a class="nav-link " href="">Chăm Sóc Da
+                                                    Mặt</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+                <div class="pt-1 ">
+                    <h3 style="color: #323c3f;">Lọc Sản Phẩm</h3>
+                    <div>
+                        <h5 style="color: #333;" class="fs-6 fw-bold border-bottom border-61c472">Giá Sản Phẩm</h5>
+                        <div class="">
+                            <div id="list-example" class="list-group">
+                                <ul class="list-group fs-7 scroll">
+                                    <li class="list-group-item ">
+                                        <input class="form-check-input me-1" type="checkbox" value=""
+                                            id="firstCheckbox">
+                                        <label class="form-check-label" for="firstCheckbox">Dưới 100,000 đ</label>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <input class="form-check-input me-1" type="checkbox" value=""
+                                            id="secondCheckbox">
+                                        <label class="form-check-label" for="secondCheckbox">Từ 100,000 -
+                                            200,000</label>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <input class="form-check-input me-1" type="checkbox" value=""
+                                            id="thirdCheckbox">
+                                        <label class="form-check-label" for="thirdCheckbox">Từ 200,000 - 300,000</label>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <input class="form-check-input me-1" type="checkbox" value=""
+                                            id="firstCheckbox">
+                                        <label class="form-check-label" for="firstCheckbox">Từ 300,000 - 500,000</label>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <input class="form-check-input me-1" type="checkbox" value=""
+                                            id="secondCheckbox">
+                                        <label class="form-check-label" for="secondCheckbox">Từ 300,000 -
+                                            500,000</label>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <input class="form-check-input me-1" type="checkbox" value=""
+                                            id="thirdCheckbox">
+                                        <label class="form-check-label" for="thirdCheckbox">Trên 1,000,000 điểm</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-3 pb-3 d-none d-lg-block">
+                    <div class="border-bottom border-61c472">
+                        <h5 style="color: #333;" class="fs-6 fw-bold ">Sản Phẩm Bán Chạy</h5>
+                    </div>
+                    <div class="row mt-3 border-dashed mb-2 pb-2">
+                        <div class="col-4">
+                            <img width="80px"
+                                src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190404_To2aLnlaqS23CB5kV8kr8B4t.jpg"
+                                alt="">
+                        </div>
+                        <div class="col-8">
+                            <div style="margin-top:29px;">
+                                <a class="detail-hover" href="">Bút kẻ mắt NYX 11</a>
+                                <h6 class="fw-bold" style="color: #61c472;">650,000 đ</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3 border-dashed mb-2 pb-2">
+                        <div class="col-4">
+                            <img width="80px"
+                                src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190402_jiGhXSgaEbxNh1m1aWrgH7pj.jpg"
+                                alt="">
+                        </div>
+                        <div class="col-8">
+                            <div style="margin-top:29px;">
+                                <a class="detail-hover" href="">Mặc nạ ngủ chăm sóc da mặt</a>
+                                <h6 class="fw-bold" style="color: #61c472;">650,000 đ</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3 border-dashed mb-2 pb-2">
+                        <div class="col-4">
+                            <img width="80px"
+                                src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190402_hXXKF15V7wodkF1nUYO7BVzu.png"
+                                alt="">
+                        </div>
+                        <div class="col-8">
+                            <div style="margin-top:29px;">
+                                <a class="detail-hover" href="">Mặc nạ ngủ chăm sóc da mặt</a>
+                                <h6 class="fw-bold" style="color: #61c472;">650,000 đ</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3 border-dashed mb-2 pb-2">
+                        <div class="col-4">
+                            <img width="80px"
+                                src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190402_FhKHudsYubyBvUar52veQa3t.png"
+                                alt="">
+                        </div>
+                        <div class="col-8">
+                            <div style="margin-top:29px;">
+                                <a class="detail-hover" href="">Mặc nạ ngủ chăm sóc da mặt</a>
+                                <h6 class="fw-bold" style="color: #61c472;">650,000 đ</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3 border-dashed mb-2 pb-2">
+                        <div class="col-4">
+                            <img width="80px"
+                                src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190402_VEKaWVkb3onB9ntby8dGNQQ9.jpg"
+                                alt="">
+                        </div>
+                        <div class="col-8">
+                            <div style="margin-top:29px;">
+                                <a class="detail-hover" href="">Mặc nạ ngủ chăm sóc da mặt</a>
+                                <h6 class="fw-bold" style="color: #61c472;">650,000 đ</h6>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-1 d-none d-lg-block" style="width:70px"></div>
+            <div class="col-11 col-md-11 col-lg-8 mt-3">
+                <div class="row d-flex justify-content-between pb-3 border-bottom">
+                    <div class="col-7 col-sm-5 ps-0">
+                        <h1 class="title-DMP">Trang Điểm</h1>
+                    </div>
+                    <div class="col-3 col-sm-5 d-flex justify-content-end pe-0">
+                        <h6 class="lable-DPM fw-bold d-none d-lg-block"> Sắp xếp</h6>
+                        <select class="form-select" style="width: 150px;" aria-label="Default select example">
+                            <option selected>Mặc Định</option>
+                            <option value="1">Giá tăng dần<nav></nav>
+                            </option>
+                            <option value="2">Giá giảm dần</option>
+                            <option value="3">Sale</option>
+                            <option value="1">A → Z</option>
+                            <option value="2">Z → A</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4 product">
+                        <a href="#" class="">
+                            <div class="card product-media">
+                                <div class="">
+                                    <a href=""><img
+                                            src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190404_To2aLnlaqS23CB5kV8kr8B4t.jpg"
+                                            class="card-img-top" alt="..."></a>
+                                </div>
+                                <div class="card-body text-center w-100 product-caption">
+                                    <a href="#">
+                                        <p class="card-text product-title">Bút kẻ mắt NYX 11
+                                            chất</p>
+                                    </a> <a href="#">
+                                        <p class="card-text price">670,000đ</p>
+                                    </a>
+                                </div>
+                                <div class="prod-icons">
+                                    <a href=""><i class="bi bi-heart"></i></a> <a href=""><i
+                                            class="bi bi-cart4"></i></a> <a href=""><i class="bi bi-share"></i></a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4 product">
+                        <a href="#" class="">
+                            <div class="card product-media">
+                                <div class="">
+                                    <a href=""><img
+                                            src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190402_mCLIgdZjN1jMg2AXhJU1UxVR.jpg"
+                                            class="card-img-top" alt="..."></a>
+                                </div>
+                                <div class="card-body text-center w-100 product-caption">
+                                    <a href="#">
+                                        <p class="card-text product-title">Bảng phấn Stila Sending
+                                            tia UV</p>
+                                    </a> <a href="#">
+                                        <p class="card-text price">980,000đ</p>
+                                    </a>
+                                </div>
+                                <div class="prod-icons">
+                                    <a href=""><i class="bi bi-heart"></i></a> <a href=""><i
+                                            class="bi bi-cart4"></i></a> <a href=""><i class="bi bi-share"></i></a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4 product">
+                        <a href="#" class="">
+                            <div class="card product-media">
+                                <div class="">
+                                    <a href=""><img
+                                            src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190402_0rK7h8GqUlFG8GQ5CwYXD9at.jpg"
+                                            class="card-img-top" alt="..."></a>
+                                </div>
+                                <div class="card-body text-center w-100 product-caption">
+                                    <a href="#">
+                                        <p class="card-text product-title">Bảng phấn mắt Colourpop
+                                            hóa</p>
+                                    </a> <a href="#">
+                                        <p class="card-text price">870,000đ</p>
+                                    </a>
+                                </div>
+                                <div class="prod-icons">
+                                    <a href=""><i class="bi bi-heart"></i></a> <a href=""><i
+                                            class="bi bi-cart4"></i></a> <a href=""><i class="bi bi-share"></i></a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4 product">
+                        <a href="#" class="">
+                            <div class="card product-media">
+                                <div class="">
+                                    <a href=""><img
+                                            src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190402_IuSz2tJ3gFyf3J6OrSkcTdXV.jpg"
+                                            class="card-img-top" alt="..."></a>
+                                </div>
+                                <div class="card-body text-center w-100 product-caption">
+                                    <a href="#">
+                                        <p class="card-text product-title">Phấn mắt FACE IT</p>
+                                    </a> <a href="#">
+                                        <p class="card-text price">740,000đ</p>
+                                    </a>
+                                </div>
+                                <div class="prod-icons">
+                                    <a href=""><i class="bi bi-heart"></i></a> <a href=""><i
+                                            class="bi bi-cart4"></i></a> <a href=""><i class="bi bi-share"></i></a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4 product">
+                        <a href="#" class="">
+                            <div class="card product-media">
+                                <div class="">
+                                    <a href=""><img
+                                            src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190402_FmQKox48z7eoDPAGydnz2Pm6.jpg"
+                                            class="card-img-top" alt="..."></a>
+                                </div>
+                                <div class="card-body text-center w-100 product-caption">
+                                    <a href="#">
+                                        <p class="card-text product-title">Bút kẻ mắt NYX</p>
+                                    </a> <a href="#">
+                                        <p class="card-text price">670,000đ</p>
+                                    </a>
+                                </div>
+                                <div class="prod-icons">
+                                    <a href=""><i class="bi bi-heart"></i></a> <a href=""><i
+                                            class="bi bi-cart4"></i></a> <a href=""><i class="bi bi-share"></i></a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4 product">
+                        <a href="#" class="">
+                            <div class="card product-media">
+                                <div class="">
+                                    <a href=""><img
+                                            src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190402_3OwxXx206bnVHWNIdPXovioZ.jpg"
+                                            class="card-img-top" alt="..."></a>
+                                </div>
+                                <div class="card-body text-center w-100 product-caption">
+                                    <a href="#">
+                                        <p class="card-text product-title">Bút kẻ mắt Dior</p>
+                                    </a> <a href="#">
+                                        <p class="card-text price">450,000đ</p>
+                                    </a>
+                                </div>
+                                <div class="prod-icons">
+                                    <a href=""><i class="bi bi-heart"></i></a> <a href=""><i
+                                            class="bi bi-cart4"></i></a> <a href=""><i class="bi bi-share"></i></a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4 product">
+                        <a href="#" class="">
+                            <div class="card product-media">
+                                <div class="">
+                                    <a href=""><img
+                                            src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190402_wRvBkEVA4ghXxOiwhpThvFFi.jpg"
+                                            class="card-img-top" alt="..."></a>
+                                </div>
+                                <div class="card-body text-center w-100 product-caption">
+                                    <a href="#">
+                                        <p class="card-text product-title">Kem chống nắng Anthelios XL</p>
+                                    </a> <a href="#">
+                                        <p class="card-text price">540,000đ</p>
+                                    </a>
+                                </div>
+                                <div class="prod-icons">
+                                    <a href=""><i class="bi bi-heart"></i></a> <a href=""><i
+                                            class="bi bi-cart4"></i></a> <a href=""><i class="bi bi-share"></i></a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4 product">
+                        <a href="#" class="">
+                            <div class="card product-media">
+                                <div class="">
+                                    <a href=""><img
+                                            src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190402_akn3mC6Ex7D6jF3wpptsVI3e.jpg"
+                                            class="card-img-top" alt="..."></a>
+                                </div>
+                                <div class="card-body text-center w-100 product-caption">
+                                    <a href="#">
+                                        <p class="card-text product-title">Kem chống nắng Image</p>
+                                    </a> <a href="#">
+                                        <p class="card-text price">440,000đ</p>
+                                    </a>
+                                </div>
+                                <div class="prod-icons">
+                                    <a href=""><i class="bi bi-heart"></i></a> <a href=""><i
+                                            class="bi bi-cart4"></i></a> <a href=""><i class="bi bi-share"></i></a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-4 product">
+                        <a href="#" class="">
+                            <div class="card product-media">
+                                <div class="">
+                                    <a href=""><img
+                                            src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190402_mHlMhb5L0brZLa5ycs2y9rRB.jpg"
+                                            class="card-img-top" alt="..."></a>
+                                </div>
+                                <div class="card-body text-center w-100 product-caption">
+                                    <a href="#">
+                                        <p class="card-text product-title">Kem chống nắng Sunzone</p>
+                                    </a> <a href="#">
+                                        <p class="card-text price">230,000đ</p>
+                                    </a>
+                                </div>
+                                <div class="prod-icons">
+                                    <a href=""><i class="bi bi-heart"></i></a> <a href=""><i
+                                            class="bi bi-cart4"></i></a> <a href=""><i class="bi bi-share"></i></a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ng-include="'footer.html'"></div>
+
+    <!-- 
+    
+ -->
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="/src/main/resources/static/js/js.js"></script>
+
+    <body>
+
+    </body>
+
+</html>

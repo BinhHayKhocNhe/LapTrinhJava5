@@ -24,10 +24,3 @@ body{
         white-space: nowrap;
     }
 }
-.table thead th{
-	background-color: rgb(184, 244, 174);
-
-	font-family: "Mulish", sans-serif;
-    font-optical-sizing: auto;
-    font-style: normal;
-}

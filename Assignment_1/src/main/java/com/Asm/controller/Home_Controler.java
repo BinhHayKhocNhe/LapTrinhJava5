@@ -29,9 +29,21 @@ public class Home_Controler {
 	public String duocMyPham() {
 		return "DuocMyPham";
 	}
+	@GetMapping("/GioHang.html")
+	public String GioHang() {
+		return "GioHang";
+	}
 
-	@GetMapping("/cart.html")
+	@GetMapping("/Cart.html")
 	public String cart() {
-		return "cart";
+		return "Cart";
+	}
+	@GetMapping("/LienHe.html")
+	public String contact() {
+		return "LienHe";
+	}
+	@GetMapping("/TrangDiem.html")
+	public String TrangDiem() {
+		return "TrangDiem";
 	}
 }

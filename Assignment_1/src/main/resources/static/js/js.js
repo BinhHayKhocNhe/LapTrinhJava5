@@ -1,7 +1,7 @@
 var app = angular.module("myApp", ["ngRoute"]);
 
 app.controller("Controller", function($scope) {
-	
+
 });
 
 app.config(function($routeProvider) {
@@ -18,8 +18,20 @@ app.config(function($routeProvider) {
 			templateUrl: "/Cart.html",
 			controller: "Controller"
 		})
+		.when("/giohang", {
+			templateUrl: "/Cart.html",
+			controller: "Controller"
+		})
+		.when("/contact", {
+			templateUrl: "/LienHe.html",
+			controller: "Controller"
+		})
+		.when("/TrangDiem", {
+			templateUrl: "/TrangDiem.html",
+			controller: "Controller"
+		})
 		.otherwise({
 			templateUrl: "/home.html",
-            controller: "TourController"
+			controller: "Controller"
 		});
 });

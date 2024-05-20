@@ -30,7 +30,7 @@
     max-height: 140px;
     overflow-y: auto;
 }
-::-webkit-scrollbar{
+/* ::-webkit-scrollbar{
     width: 10px;
 }
 ::-webkit-scrollbar-track{
@@ -39,7 +39,7 @@
 ::-webkit-scrollbar-thumb{
     background-color:#61c472;
     border-radius: 15px;
-}
+} */
 .detail-hover:hover{
     color: #61c472;
     transition: all .5s;

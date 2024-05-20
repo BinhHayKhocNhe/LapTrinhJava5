@@ -9,11 +9,14 @@ a {
 	text-decoration: none;
 }
 
-body{
-	font-family: 'Muli';
-	font-weight: normal;
+/* html, body {
+	overflow: scroll;
+}
+ */
+body {
 	background-color: #ffffff;
 	color: #525252;
+<<<<<<< HEAD
 
 }
 @media (max-width: 767px) {
@@ -24,3 +27,7 @@ body{
         white-space: nowrap;
     }
 }
+=======
+	font-family: "Mulish", sans-serif;
+}
+>>>>>>> ac8b784f2d4ea32069cceeb7ea86b1384f3a73df

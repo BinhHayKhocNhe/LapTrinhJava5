@@ -1,0 +1,6 @@
+@media only screen and (max-width: 768px) {
+    .only-media {
+        margin: auto;
+        width: 90% !important;
+    }
+}

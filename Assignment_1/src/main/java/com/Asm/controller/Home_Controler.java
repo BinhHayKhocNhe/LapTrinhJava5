@@ -59,4 +59,8 @@ public class Home_Controler {
 	public String SignUp() {
 		return "SignUp";
 	}
+	@GetMapping("/Admin.html")
+	public String admin() {
+		return "Admin";
+	}
 }

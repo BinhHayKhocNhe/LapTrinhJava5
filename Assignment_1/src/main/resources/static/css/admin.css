@@ -1,0 +1,13 @@
+
+@media (max-width: 991.98px) {
+    .config-width {
+      width: 100% !important;
+    }
+  }
+  @media (min-width: 991.98px) {
+    .config-width {
+      width: 25% !important;
+    }
+  }
+  
+  

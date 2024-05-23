@@ -1,0 +1,48 @@
+body {
+  font-family: "Poppins", sans-serif;
+  /* background: linear-gradient(to right, #e6e6ce, #cfebeb); */
+  background: url("https://media.istockphoto.com/id/1161219638/vi/anh/b%C3%A0n-ch%E1%BA%A3i-l%C3%A0m-%C4%91%E1%BA%B9p.jpg?s=2048x2048&w=is&k=20&c=KR5uom2u0qRa8GHw8GRbKpwpR1Ugn0UO5bXgvnyHyTQ=");
+  /* background: url("https://images.pexels.com/photos/212236/pexels-photo-212236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"); */
+  /* background: url("https://media.istockphoto.com/id/1126062290/vi/anh/c%E1%BA%ADn-c%E1%BA%A3nh-b%C3%A0n-ch%E1%BA%A3i-trang-%C4%91i%E1%BB%83m-chuy%C3%AAn-nghi%E1%BB%87p-v%E1%BB%9Bi-l%C3%B4ng-t%E1%BB%B1-nhi%C3%AAn-v%C3%A0-ferrule-%C4%91en-v%E1%BB%9Bi-ph%E1%BA%A5n-m%E1%BA%AFt-b%E1%BB%8B-r%C6%A1i.jpg?s=2048x2048&w=is&k=20&c=SMTugZeJ5qza6jAiXZrU-C6CdziWIBt--1DDzXzU6UY="); */
+  /* background: url("https://images.pexels.com/photos/3373746/pexels-photo-3373746.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1  "); */
+  /* background: url("https://media.istockphoto.com/id/1500806069/vi/anh/s%E1%BA%A3n-ph%E1%BA%A9m-m%E1%BB%B9-ph%E1%BA%A9m-trang-%C4%91i%E1%BB%83m-c%E1%BB%8D-trang-%C4%91i%E1%BB%83m-tr%C3%AAn-n%E1%BB%81n-%C4%91%C3%A1-c%E1%BA%A9m-th%E1%BA%A1ch-tr%E1%BA%AFng-kh%C3%A1i-ni%E1%BB%87m-th%E1%BB%9Di-trang-s%C3%A1ng.jpg?s=612x612&w=0&k=20&c=6fta_chb63-sQPyrarKJtuXfSwfvaiRHAlyNNrYpEe0= "); */
+  /* background: url("https://media.istockphoto.com/id/614342722/vi/anh/b%C3%A0n-ch%E1%BA%A3i-trang-%C4%91i%E1%BB%83m-son-b%C3%B3ng-v%C3%A0-b%C3%BAt-ch%C3%AC-v%E1%BB%9Bi-b%E1%BB%99t.jpg?s=2048x2048&w=is&k=20&c=h8h448mymJpQzktFzNcEzoJoOLLc_Twnwdj08ImDfws="); */
+  /* background: url("https://media.istockphoto.com/id/668319578/vi/anh/b%C3%A0n-ch%E1%BA%A3i-trang-%C4%91i%E1%BB%83m-v%E1%BB%9Bi-ph%E1%BA%A5n-m%C3%A1-h%E1%BB%93ng-ho%E1%BA%B7c-ph%E1%BA%A5n-m%E1%BA%AFt-c%E1%BB%A7a-t%C3%B4ng-m%C3%A0u-h%E1%BB%93ng-xanh-v%C3%A0-san-h%C3%B4-r%E1%BA%AFc-tr%C3%AAn-n%E1%BB%81n.jpg?s=2048x2048&w=is&k=20&c=C7ShjZSK8Jmg2hBYU-972tTMJMF-MNxAmLyONx_VPgY="); */
+  
+
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.box-area {
+  width: 930px;
+}
+
+.right-box {
+  padding: 40px 30px 40px 40px;
+}
+
+::placeholder {
+  font-size: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+  .box-area {
+    margin: 0 10px;
+  }
+
+  .left-box .none {
+    display: none;
+  }
+
+  .right-box {
+    padding: 20px;
+  }
+}
+
+.btn__Login:hover {
+  background-color: #61c472;
+  color: black;
+  border-color: #61c472;
+}

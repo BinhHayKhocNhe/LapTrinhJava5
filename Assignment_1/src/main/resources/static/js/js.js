@@ -30,6 +30,10 @@ app.config(function($routeProvider) {
 			templateUrl: "/TrangDiem.html",
 			controller: "Controller"
 		})
+		.when("/admin", {
+			templateUrl: "/Admin.html",
+			controller: "Controller"
+		})
 		.otherwise({
 			templateUrl: "/home.html",
 			controller: "Controller"

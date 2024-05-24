@@ -148,11 +148,11 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>binhdmps32770</td>
-									<td>Minh Bình</td>
-									<td>Admin</td>
+								<tr th:each="user : ${users}">
+									<td th:text="${user.ID_User}"></td>
+									<td th:text="${user.Username}"></td>
+									<td th:text="${user.Fullname}"></td>
+									<td th:text="${user.Role}"></td>
 									<td><a class="text-primary text-decoration-underline me-3"
 										href="#"> Xem thông tin </a> <a href="#"
 										class="text-decoration-underline text-danger">Xóa</a></td>
@@ -278,17 +278,17 @@
 						<table class="table table-hover table-bordered text-center">
 							<thead class="">
 								<tr>
-									<th scope="col">Hình ảnh</th>
 									<th scope="col">Tên sản phẩm</th>
 									<th scope="col">Giá</th>
+									<th scope="col">Loại</th>
 									<th scope="col">Chi tiết</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Sửa rửa mặt</td>
-									<td>150.000đ</td>
+								<tr th:each="product : ${products}">
+									<td th:text="${product.ProductTitle}"></td>
+									<td th:text="${product.Price}"></td>
+									<td th:text="${product.CategoryID}"></td>
 									<td><a class="text-primary text-decoration-underline me-3"
 										href="#"> Xem thông tin </a> <a href="#"
 										class="text-decoration-underline text-danger">Xóa</a></td>

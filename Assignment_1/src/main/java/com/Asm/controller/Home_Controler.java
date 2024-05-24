@@ -1,10 +1,25 @@
 package com.Asm.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.Asm.Model.Products;
+import com.Asm.Model.Users;
+import com.Asm.service.ProductService;
+import com.Asm.service.UserService;
 
 @Controller
 public class Home_Controler {
+	@Autowired
+	private UserService userService;
+	@Autowired
+	private ProductService productService;
+
 	@GetMapping("/")
 	public String index() {
 		return "index";
@@ -26,13 +41,10 @@ public class Home_Controler {
 	}
 
 	@GetMapping("/DuocMyPham.html")
-	public String duocMyPham() {
+	public String duocMyPham(Model model) {
+		List<Products> productList = productService.getProductsByCategoryMP();
+		model.addAttribute("products", productList);
 		return "DuocMyPham";
-	}
-
-	@GetMapping("/GioHang.html")
-	public String GioHang() {
-		return "GioHang";
 	}
 
 	@GetMapping("/Cart.html")
@@ -46,12 +58,18 @@ public class Home_Controler {
 	}
 
 	@GetMapping("/TrangDiem.html")
-	public String TrangDiem() {
+	public String TrangDiem(Model model) {
+		List<Products> productList = productService.getProductsByCategoryTD();
+		model.addAttribute("products", productList);
 		return "TrangDiem";
 	}
 
 	@GetMapping("/Admin.html")
-	public String admin() {
+	public String admin(Model model) {
+		List<Users> users = userService.findAll();
+		List<Products> products = productService.findAll();
+		model.addAttribute("users", users);
+		model.addAttribute("products", products);
 		return "Admin";
 	}
 }

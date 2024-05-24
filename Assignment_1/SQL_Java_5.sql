@@ -33,7 +33,7 @@ VALUES ('MP', N'Dược mỹ phẩm', NULL),
 
 CREATE TABLE Products (
     ProductID INT PRIMARY KEY AUTO_INCREMENT,
-    ProductName NVARCHAR(1000) NOT NULL,
+    ProductTitle NVARCHAR(255) NOT NULL,
     Price DECIMAL(10, 2) NOT NULL,
     ImageURL NVARCHAR(255),
     Quantity INT NOT NULL,
@@ -42,6 +42,10 @@ CREATE TABLE Products (
 	Note NVARCHAR(20),
     CONSTRAINT FK_CategoryID FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
 );
+
+ALTER TABLE Products DROP COLUMN product_title;
+ALTER TABLE Products CHANGE ProductTitle product_title NVARCHAR(255) NOT NULL;
+
 
 INSERT INTO Products (ProductName, Price, ImageURL, Quantity, CategoryID, Sale, Note)
 VALUES
@@ -72,14 +76,13 @@ VALUES
 (N'Sữa rửa mặt Kose', 760000, N'product_22.jpg', 300, N'TD', 0, null),
 (N'Sữa rửa mặt lô hội', 870000, N'product_23.jpg', 300, N'TD', 0, null),
 (N'Sữa rửa mặt ngừa mụn', 760000, N'product_24.jpg', 300, N'TD', 15, null);
-select * from Products;
 CREATE TABLE Invoices (
     ID INT PRIMARY KEY AUTO_INCREMENT,
-    UserID INT NOT NULL,
+    ID_User INT NOT NULL,
     TotalAmount DECIMAL(10, 2) NOT NULL,
     PhoneNumber NVARCHAR(20) NOT NULL,
     Address NVARCHAR(255) NOT NULL,
-    CONSTRAINT FK_UserID FOREIGN KEY (UserID) REFERENCES Users(ID_User)
+    CONSTRAINT FK_UserID FOREIGN KEY (ID_User) REFERENCES Users(ID_User)
 );
 CREATE TABLE InvoiceDetails (
     ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -92,7 +95,7 @@ CREATE TABLE InvoiceDetails (
 );
 
 -- Chèn mẫu dữ liệu vào bảng Invoices
-INSERT INTO Invoices (UserID, TotalAmount, PhoneNumber, Address)
+INSERT INTO Invoices (ID_User, TotalAmount, PhoneNumber, Address)
 VALUES 
     (1, 150000, '123456789', '123 Main Street'),
     (2, 250000, '987654321', '456 Elm Street');

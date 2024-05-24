@@ -287,7 +287,8 @@
 							<tbody>
 								<tr th:each="product : ${products}">
 									<td th:text="${product.ProductTitle}"></td>
-									<td th:text="${product.Price}"></td>
+									<td
+										th:text="${#numbers.formatInteger(product.Price,3,'POINT')}+ 'đ'"></td>
 									<td th:text="${product.CategoryID}"></td>
 									<td><a class="text-primary text-decoration-underline me-3"
 										href="#"> Xem thông tin </a> <a href="#"

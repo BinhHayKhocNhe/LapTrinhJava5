@@ -225,7 +225,8 @@
 										<p class="card-text product-title"
 											th:text="${product.ProductTitle}"></p>
 									</a> <a href="#">
-										<p class="card-text price" th:text="${product.Price}"></p>
+										<p class="card-text price"
+											th:text="${#numbers.formatInteger(product.Price,3,'POINT')}+ 'đ'"></p>
 									</a>
 								</div>
 								<div class="prod-icons">

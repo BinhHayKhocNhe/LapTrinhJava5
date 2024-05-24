@@ -64,6 +64,15 @@ public class Home_Controler {
 		return "TrangDiem";
 	}
 
+	@GetMapping("/SignIn")
+	public String SignIn() {
+		return "SignIn";
+	}
+
+	@GetMapping("/SignUp")
+	public String SignUp() {
+		return "SignUp";
+	}
 	@GetMapping("/Admin.html")
 	public String admin(Model model) {
 		List<Users> users = userService.findAll();

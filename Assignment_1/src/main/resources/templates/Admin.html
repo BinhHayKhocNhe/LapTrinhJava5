@@ -154,7 +154,7 @@
 									<td th:text="${user.Fullname}"></td>
 									<td th:text="${user.Role}"></td>
 									<td><a class="text-primary text-decoration-underline me-3"
-										href="#"> Xem thông tin </a> <a href="#"
+										th:href="@{'/edit/' + ${user.ID_User}}"> Xem thông tin </a> <a href="#"
 										class="text-decoration-underline text-danger">Xóa</a></td>
 								</tr>
 							</tbody>
@@ -301,7 +301,7 @@
 								class="pagination d-flex align-items-center justify-content-center">
 								<li class="page-item"><a class="page-link" href="#">Đầu
 										tiên</a></li>
-								<li class="page-item"><a class="page-link" href="#">1</a></li>
+								<li class="page-item"><a class="page-link" href="">1</a></li>
 								<li class="page-item"><a class="page-link" href="#">2</a></li>
 								<li class="page-item"><a class="page-link" href="#">3</a></li>
 								<li class="page-item"><a class="page-link" href="#">Cuối

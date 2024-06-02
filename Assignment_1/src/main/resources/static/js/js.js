@@ -1,9 +1,5 @@
 var app = angular.module("myApp", ["ngRoute"]);
 
-app.controller("Controller", function($scope) {
-
-});
-
 app.config(function($routeProvider) {
 	$routeProvider
 		.when("/home", {
@@ -30,16 +26,6 @@ app.config(function($routeProvider) {
 			templateUrl: "/TrangDiem.html",
 			controller: "Controller"
 		})
-
-//		.when("/SignUp", {
-//			templateUrl: "/SignUp.html",
-//			controller: "Controller"
-//		})
-//		.when("/SignIn", {
-//			templateUrl: "/SignIn.html",
-//			controller: "Controller"
-//		})
-
 		.when("/admin", {
 			templateUrl: "/Admin.html",
 			controller: "Controller"

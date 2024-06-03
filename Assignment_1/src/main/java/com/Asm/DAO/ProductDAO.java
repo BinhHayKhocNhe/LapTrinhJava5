@@ -1,4 +1,4 @@
-package com.Asm.Interface;
+package com.Asm.DAO;
 
 import java.util.List;
 
@@ -7,10 +7,12 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.Asm.Model.Products;
 
-public interface ProductInterface extends JpaRepository<Products, Long> {
+public interface ProductDAO extends JpaRepository<Products, Long> {
 	@Query("SELECT p FROM Products p WHERE p.CategoryID = 'MP'")
 	List<Products> findByCategoryIdCustom();
-	
+
 	@Query("SELECT p FROM Products p WHERE p.CategoryID = 'TD'")
 	List<Products> findByCategoryIdCustomTD();
+	
+	
 }

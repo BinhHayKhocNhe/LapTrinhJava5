@@ -7,19 +7,17 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-
+import com.Asm.DAO.ProductDAO;
+import com.Asm.DAO.UserDAO;
 import com.Asm.Model.Products;
 import com.Asm.Model.Users;
-import com.Asm.service.ProductService;
-import com.Asm.service.UserService;
-
 @Controller
 public class Home_Controler {
 	@Autowired
-	private UserService userService;
+	private ProductDAO productDAO;
+
 	@Autowired
-	private ProductService productService;
+	private UserDAO userDAO;
 
 	@GetMapping("/")
 	public String index() {
@@ -43,7 +41,7 @@ public class Home_Controler {
 
 	@GetMapping("/DuocMyPham.html")
 	public String duocMyPham(Model model) {
-		List<Products> productList = productService.getProductsByCategoryMP();
+		List<Products> productList = productDAO.findByCategoryIdCustom();
 		model.addAttribute("products", productList);
 		return "DuocMyPham";
 	}
@@ -60,7 +58,7 @@ public class Home_Controler {
 
 	@GetMapping("/TrangDiem.html")
 	public String TrangDiem(Model model) {
-		List<Products> productList = productService.getProductsByCategoryTD();
+		List<Products> productList = productDAO.findByCategoryIdCustom();
 		model.addAttribute("products", productList);
 		return "TrangDiem";
 	}
@@ -77,14 +75,14 @@ public class Home_Controler {
 
 	@GetMapping("/Admin.html")
 	public String admin(Model model) {
-		List<Users> users = userService.findAll();
-		List<Products> products = productService.findAll();
+		List<Users> users = userDAO.findAll();
+		List<Products> products = productDAO.findAll();
 		model.addAttribute("users", users);
 		model.addAttribute("products", products);
 		return "Admin";
 	}
 
-	//Di chuyển trang không lỗi
+	// Di chuyển trang không lỗi
 	@GetMapping("/edit/{ID_User}")
 	public String getTrangDiem(@PathVariable("ID_User") String id) {
 		System.out.println(id);

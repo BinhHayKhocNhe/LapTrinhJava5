@@ -1,9 +1,9 @@
-package com.Asm.Interface;
+package com.Asm.DAO;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.Asm.Model.Users;
 
-public interface UserInterface extends JpaRepository<Users, Long>{
+public interface UserDAO extends JpaRepository<Users, Long>{
 
 }

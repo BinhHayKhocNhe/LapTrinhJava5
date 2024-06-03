@@ -82,7 +82,7 @@ CREATE TABLE Products(
     CONSTRAINT FK_Category_Products FOREIGN KEY (CategoryID) REFERENCES Categories(Id)
 );
 select * from products;
-INSERT INTO Products (Name, Image, Price, CreateDate, Available, CategoryIDcategoriescategories) VALUES
+INSERT INTO Products (Name, Image, Price, Creationdate, Available, CategoryID) VALUES
 ('Product 1', 'image1.jpg', 10.99, '2024-05-26', b'1', 'C001'),
 ('Product 2', 'image2.jpg', 20.99, '2024-05-26', b'1', 'C002'),
 ('Product 3', 'image3.jpg', 30.99, '2024-05-26', b'1', 'C001'),

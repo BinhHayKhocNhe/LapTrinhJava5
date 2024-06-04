@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Admin</title>
+<link rel="icon"
+	href="https://phuongnamvina.com/img_data/images/lam-logo-ban-hang-online-dep.jpg">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+	crossorigin="anonymous">
+<script defer="" type="text/javascript"
+	src="https://web.nvnstatic.net/js/bootstrap/bootstrap-3.3.5.min.js?v=2"></script>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/header.css">
+<link rel="stylesheet" href="/css/footer.css">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+	<div th:insert="fragments/header :: header"></div>
+	<form class="w-100 mt-3 d-flex justify-content-center" action="/User"
+		method="post">
+		<div class="input-group config-width">
+			<input type="text" class="form-control" placeholder="Tìm kiếm"
+				name="keywordsUser" th:value="${keywordsUser}">
+			<button class="btn btn-secondary" type="submit" id="button-addon2">
+				<i class="bi bi-search"></i>
+			</button>
+		</div>
+	</form>
+	<div class="container">
+
+		<div class="row">
+			<div class="col-lg-3 col-md-12 col-sm-12 border p-3 rounded-3 mt-3">
+				<form>
+					<div class="mb-2">
+						<label for="exampleInputEmail1" class="form-label">ID:</label> <input
+							type="text" class="form-control" disabled>
+					</div>
+					<div class="mb-2">
+						<label for="exampleInputEmail1" class="form-label">Tài
+							khoản:</label> <input type="text" class="form-control" required>
+					</div>
+					<div class="mb-2">
+						<label for="exampleInputPassword1" class="form-label">Mật
+							khẩu:</label> <input type="password" class="form-control" required>
+					</div>
+					<div class="mb-2">
+						<label for="exampleInputEmail1" class="form-label">Họ tên:</label>
+						<input type="text" class="form-control" required>
+					</div>
+					<div class="mb-2">
+						<label for="exampleInputEmail1" class="form-label">Email:</label>
+						<input type="email" class="form-control" required>
+					</div>
+					<div class="mb-2">
+						<label for="exampleInputEmail1" class="form-label">Số điện
+							thoại:</label> <input type="number" class="form-control" min="1" required>
+					</div>
+					<div class="d-flex mb-2">
+						<div class="me-3">Giới tính:</div>
+						<div class="form-check me-2">
+							<input class="form-check-input" type="radio" checked> <label
+								class="form-check-label"> Nam </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"> <label
+								class="form-check-label"> Nữ </label>
+						</div>
+					</div>
+					<div class="mb-2">
+						<label for="exampleInputEmail1" class="form-label">Ngày
+							sinh:</label> <input type="date" class="form-control" min="1" required>
+					</div>
+					<div class="d-flex mb-2">
+						<div class="me-3">Vai trò:</div>
+						<div class="form-check me-2">
+							<input class="form-check-input" type="radio" checked> <label
+								class="form-check-label"> Admin </label>
+						</div>
+						<div class="form-check">
+							<input class="form-check-input" type="radio"> <label
+								class="form-check-label"> User </label>
+						</div>
+					</div>
+					<div>
+						<button type="button" class="btn btn-primary" id="liveToastBtn">Thêm</button>
+						<div class="toast-container position-fixed bottom-0 end-0 p-3">
+							<div id="liveToast" class="toast" role="alert"
+								aria-live="assertive" aria-atomic="true">
+								<div class="toast-header">
+									<strong class="me-auto">Thao tác thêm</strong> <small>just
+										now</small>
+									<button type="button" class="btn-close" data-bs-dismiss="toast"
+										aria-label="Close"></button>
+								</div>
+								<div class="toast-body">Trạng thái thành công</div>
+							</div>
+						</div>
+
+						<button type="button" class="btn btn-danger"
+							id="liveToastBtnDelete">Xóa</button>
+						<div class="toast-container position-fixed bottom-0 end-0 p-3">
+							<div id="liveToastDelete" class="toast" role="alert"
+								aria-live="assertive" aria-atomic="true">
+								<div class="toast-header">
+									<strong class="me-auto">Thao tác xóa</strong> <small>just
+										now</small>
+									<button type="button" class="btn-close" data-bs-dismiss="toast"
+										aria-label="Close"></button>
+								</div>
+								<div class="toast-body">Trạng thái thành công</div>
+							</div>
+						</div>
+
+						<button type="button" class="btn btn-warning"
+							id="liveToastBtnUpdate">Sửa</button>
+						<div class="toast-container position-fixed bottom-0 end-0 p-3">
+							<div id="liveToastUpdate" class="toast" role="alert"
+								aria-live="assertive" aria-atomic="true">
+								<div class="toast-header">
+									<strong class="me-auto">Thao tác sửa</strong> <small>just
+										now</small>
+									<button type="button" class="btn-close" data-bs-dismiss="toast"
+										aria-label="Close"></button>
+								</div>
+								<div class="toast-body">Trạng thái thành công</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-lg-9 col-md-12 col-sm-12 mt-3">
+				<table class="table table-hover table-bordered text-center">
+					<thead class="">
+						<tr>
+							<th scope="col">ID</th>
+							<th scope="col">Tài khoản</th>
+							<th scope="col">Họ tên</th>
+							<th scope="col">Vai trò</th>
+							<th scope="col">Chi tiết</th>
+						</tr>
+					</thead>
+					<tbody th:if="${pageUser != null}">
+						<tr th:each="user, index : ${pageUser.content}">
+							<td th:text="${user.ID_User}"></td>
+							<td th:text="${user.Username}"></td>
+							<td th:text="${user.Fullname}"></td>
+							<td th:text="${user.Role}"></td>
+							<td><a class="text-primary text-decoration-underline me-3"
+								th:href="@{'/edit/' + ${user.ID_User}}"> Xem thông tin </a> <a
+								href="#" class="text-decoration-underline text-danger">Xóa</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<nav aria-label="Page navigation example"
+					class="d-flex justify-content-center mb-3"
+					th:if="${pageUser != null}">
+					<ul class="pagination">
+						<li class="page-item"><a class="page-link"
+							th:href="@{/User(p=0)}">Đầu tiên</a></li>
+						<li class="page-item" th:if="${pageUser.number > 1}"><a
+							class="page-link" th:href="@{/User(p=${pageUser.number - 1})}">&laquo;</a></li>
+						<li class="page-item" th:if="${pageUser.number > 2}"><span
+							class="page-link">...</span></li>
+						<li class="page-item"
+							th:each="i : ${#numbers.sequence(0, pageUser.totalPages - 1)}"><a
+							class="page-link" th:href="@{/User(p=${i})}" th:text="${i + 1}"></a></li>
+						<li class="page-item"
+							th:if="${pageUser.number < pageUser.totalPages - 3}"><span
+							class="page-link">...</span></li>
+						<li class="page-item"
+							th:if="${pageUser.number < pageUser.totalPages - 1}"><a
+							class="page-link" th:href="@{/User(p=${pageUser.number + 1})}">&raquo;</a></li>
+						<li class="page-item"><a class="page-link"
+							th:href="@{/User(p=${pageUser.totalPages - 1})}">Cuối cùng</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+	<div th:insert="fragments/footer :: footer"></div>
+</body>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
+<script>
+		const toastTrigger = document.getElementById('liveToastBtn')
+		const toastLiveExample = document.getElementById('liveToast')
+
+		if (toastTrigger) {
+		const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+		toastTrigger.addEventListener('click', () => {
+			toastBootstrap.show()
+		})
+		}
+
+		const toastTriggerDelete = document.getElementById('liveToastBtnDelete')
+		const toastLiveExampleDelete = document.getElementById('liveToastDelete')
+
+		if (toastTriggerDelete) {
+		const toastBootstrapDelete = bootstrap.Toast.getOrCreateInstance(toastLiveExampleDelete)
+		toastTriggerDelete.addEventListener('click', () => {
+			toastBootstrapDelete.show()
+		})
+		}
+
+		const toastTriggerUpdate = document.getElementById('liveToastBtnUpdate')
+		const toastLiveExampleUpdate = document.getElementById('liveToastUpdate')
+
+		if (toastTriggerUpdate) {
+		const toastBootstrapUpdate = bootstrap.Toast.getOrCreateInstance(toastLiveExampleUpdate)
+		toastTriggerUpdate.addEventListener('click', () => {
+			toastBootstrapUpdate.show()
+		})
+		}
+	</script>
+</html>

@@ -33,7 +33,7 @@ VALUES ('MP', N'Dược mỹ phẩm', NULL),
 
 CREATE TABLE Products (
     ProductID INT PRIMARY KEY AUTO_INCREMENT,
-    ProductTitle NVARCHAR(255) NOT NULL,
+    product_title NVARCHAR(255) NOT NULL,
     Price DECIMAL(10, 2) NOT NULL,
     ImageURL NVARCHAR(255),
     Quantity INT NOT NULL,
@@ -47,7 +47,7 @@ ALTER TABLE Products DROP COLUMN product_title;
 ALTER TABLE Products CHANGE ProductTitle product_title NVARCHAR(255) NOT NULL;
 
 
-INSERT INTO Products (ProductName, Price, ImageURL, Quantity, CategoryID, Sale, Note)
+INSERT INTO Products (product_title, Price, ImageURL, Quantity, CategoryID, Sale, Note)
 VALUES
 (N'Dầu gội Daeng nhân sâm phục hồi', 980000, N'product_1.jpg', 300, N'MP', 0, null),
 (N'Tinh dầu dưỡng tóc tinh chất', 670000, N'product_2.jpg', 350, N'MP', 5, null),
@@ -62,7 +62,7 @@ VALUES
 (N'Dầu xả dưỡng ẩm Ichikami', 870000, N'product_11.jpg', 300, N'MP', 0, null),
 (N'Tinh dầu dưỡng tóc mềm mượt', 760000, N'product_12.jpg', 300, N'MP', 0, null);
 
-INSERT INTO Products (ProductName, Price, ImageURL, Quantity, CategoryID, Sale, Note)
+INSERT INTO Products (product_title, Price, ImageURL, Quantity, CategoryID, Sale, Note)
 VALUES
 (N'Bút kẻ mắt NYX 11', 450000, N'product_13.jpg', 300, N'TD', 0, null),
 (N'Bảng phấn Stila Sending', 560000, N'product_14.jpg', 350, N'TD', 5, null),

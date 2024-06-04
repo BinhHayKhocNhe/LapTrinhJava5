@@ -67,19 +67,4 @@ public class Home_Controler {
 		return "SignUp";
 	}
 
-	@GetMapping("/Admin")
-	public String admin(Model model) {
-		List<Users> users = userDAO.findAll();
-		List<Products> products = productDAO.findAll();
-		model.addAttribute("users", users);
-		model.addAttribute("products", products);
-		return "Admin";
-	}
-//
-//	// Di chuyển trang không lỗi
-//	@GetMapping("/edit/{ID_User}")
-//	public String getTrangDiem(@PathVariable("ID_User") String id) {
-//		System.out.println(id);
-//		return "redirect:/#!admin";
-//	}
 }

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div th:fragment="header">
+		<header>
+			<div class="top-bar">
+				<div class="container">
+					<div class="row me-5">
+						<div class="col-12 d-flex align-items-center justify-content-end">
+							<div class="me-3 pe-3 border-end">
+								<a href="#"> <i class="bi bi-house"></i> <span>Hệ
+										thống cửa hàng</span>
+								</a>
+							</div>
+							<div>
+								<a href="#"> <i class="bi bi-telephone"></i> <span>0385193525</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container-fuide border-bottom">
+				<div class="container py-3">
+					<div class="row">
+						<div class="col-lg-4 col-md-6 col-sm-6 header-items">
+							<div class="hotline">
+								<a href="#"> <img class="img-hotline"
+									src="https://web.nvnstatic.net/tp/T0269/img/tmp/mobile-phone.svg?v=3"
+									alt=""> <span class="fw-normal">0385293535</span>
+								</a>
+							</div>
+						</div>
+						<div
+							class="col-lg-4 d-none d-md-block d-lg-block header-items-logo">
+							<div class="logo text-center">
+								<a href="#"> <img
+									src="https://pos.nvncdn.com/ecf0d0-45233/store/20190401_2T7UzVsuzJQeCNaVLIFuGf1o.jpg"
+									alt="">
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-6 col-sm-6 header-items">
+							<div
+								class="d-flex justify-content-end justify-content-md-end justify-content-lg-center align-items-center">
+								<div class="cart me-3">
+									<a href="/Cart" class="position-relative"> <i
+										class="bi bi-cart"></i> <span
+										class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
+											1</span>
+									</a>
+								</div>
+								<div class="search me-3">
+									<div class="nav-item">
+										<a class="nav-link" href="#" role="button"
+											data-bs-toggle="dropdown" aria-expanded="false"> <i
+											class="bi bi-search"></i>
+										</a>
+										<ul class="dropdown-menu" style="border: none;">
+											<div class="input-group mb-3">
+												<input type="text" class="form-control"
+													placeholder="Tìm kiếm sản phẩm...">
+												<button class="btn btn-outline-secondary" type="button"
+													id="button-addon2">
+													<i class="bi bi-search icon-search-button"></i>
+												</button>
+											</div>
+										</ul>
+									</div>
+								</div>
+								<div class="user">
+									<div class="nav-item dropdown">
+										<a class="nav-link" href="#" role="button"
+											data-bs-toggle="dropdown" aria-expanded="false"> <i
+											class="bi bi-person-circle"></i>
+										</a>
+										<ul class="dropdown-menu">
+											<li><a class="dropdown-item" href="SignIn">Đăng nhập</a></li>
+											<li><a class="dropdown-item" href="SignUp">Đăng kí</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container-fluid border-bottom 	">
+				<div class="container d-flex justify-content-lg-center  ">
+					<nav class="navbar navbar-expand-lg">
+						<div class="container-fluid">
+							<button class="navbar-toggler" type="button"
+								data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+								aria-controls="navbarNavDropdown" aria-expanded="false"
+								aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+							<div class="collapse navbar-collapse " id="navbarNavDropdown">
+								<ul class="navbar-nav navbar-items">
+									<li class="nav-item"><a class="nav-link" href="/"
+										ng-href="/">Trang chủ</a></li>
+									<li class="nav-item"><a class="nav-link"
+										href="/DuocMyPham">Dược mỹ phẩm</a></li>
+									<li class="nav-item"><a class="nav-link" href="/TrangDiem">Trang
+											điểm</a></li>
+									<li class="nav-item"><a class="nav-link" href="#about">Giới
+											thiệu</a></li>
+									<li class="nav-item"><a class="nav-link" href="/LienHe">Liên
+											hệ</a></li>
+									<li class="nav-item"><a class="nav-link" href="/Admin">Quản
+											lí</a></li>
+								</ul>
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</header>
+	</div>
+</body>
+</html>

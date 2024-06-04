@@ -1,64 +1,58 @@
 package com.Asm.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import com.Asm.DAO.ProductDAO;
 import com.Asm.DAO.UserDAO;
 import com.Asm.Model.Products;
 import com.Asm.Model.Users;
+
 @Controller
 public class Home_Controler {
 	@Autowired
-	private ProductDAO productDAO;
+	private ProductDAO productDAO = null;
 
 	@Autowired
-	private UserDAO userDAO;
+	private UserDAO userDAO = null;
 
 	@GetMapping("/")
 	public String index() {
 		return "index";
 	}
 
-	@GetMapping("/header.html")
-	public String header() {
-		return "header";
-	}
-
-	@GetMapping("/footer.html")
-	public String footer() {
-		return "footer";
-	}
-
-	@GetMapping("/home.html")
-	public String home() {
-		return "home";
-	}
-
-	@GetMapping("/DuocMyPham.html")
-	public String duocMyPham(Model model) {
-		List<Products> productList = productDAO.findByCategoryIdCustom();
-		model.addAttribute("products", productList);
+	@GetMapping("/DuocMyPham")
+	public String duocMyPham(Model model, @RequestParam("p") Optional<Integer> p) {
+		Pageable pageable = PageRequest.of(p.orElse(0), 6);
+		Page<Products> page = productDAO.findByCategoryIdCustom(pageable);
+		model.addAttribute("page", page);
 		return "DuocMyPham";
 	}
 
-	@GetMapping("/Cart.html")
+	@GetMapping("/Cart")
 	public String cart() {
 		return "Cart";
 	}
 
-	@GetMapping("/LienHe.html")
+	@GetMapping("/LienHe")
 	public String contact() {
 		return "LienHe";
 	}
 
-	@GetMapping("/TrangDiem.html")
+	@GetMapping("/TrangDiem")
 	public String TrangDiem(Model model) {
-		List<Products> productList = productDAO.findByCategoryIdCustom();
+		List<Products> productList = productDAO.findByCategoryIdCustomTD();
 		model.addAttribute("products", productList);
 		return "TrangDiem";
 	}
@@ -73,7 +67,7 @@ public class Home_Controler {
 		return "SignUp";
 	}
 
-	@GetMapping("/Admin.html")
+	@GetMapping("/Admin")
 	public String admin(Model model) {
 		List<Users> users = userDAO.findAll();
 		List<Products> products = productDAO.findAll();
@@ -81,11 +75,11 @@ public class Home_Controler {
 		model.addAttribute("products", products);
 		return "Admin";
 	}
-
-	// Di chuyển trang không lỗi
-	@GetMapping("/edit/{ID_User}")
-	public String getTrangDiem(@PathVariable("ID_User") String id) {
-		System.out.println(id);
-		return "redirect:/#!admin";
-	}
+//
+//	// Di chuyển trang không lỗi
+//	@GetMapping("/edit/{ID_User}")
+//	public String getTrangDiem(@PathVariable("ID_User") String id) {
+//		System.out.println(id);
+//		return "redirect:/#!admin";
+//	}
 }

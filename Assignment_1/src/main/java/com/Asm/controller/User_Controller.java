@@ -1,8 +1,5 @@
 package com.Asm.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.Asm.DAO.UserDAO;
 import com.Asm.Model.Users;
 import com.Asm.Utils.SessionService;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class User_Controller {
@@ -47,8 +42,10 @@ public class User_Controller {
 	private String searchUser(Model model, @RequestParam("keywordsUser") Optional<String> key,
 			@RequestParam("p") Optional<Integer> p) {
 		Users user = new Users();
+		if (user.getRole() == null) {
+			user.setRole("Admin");
+		}
 		model.addAttribute("user", user);
-		model.addAttribute("checkedRole", user.getRole());
 		loadUserData(model, key, p);
 		return "User";
 	}
@@ -99,7 +96,7 @@ public class User_Controller {
 	}
 
 	@GetMapping(value = "/deleteUser/{ID_User}")
-	public String create(@PathVariable("ID_User") Long id, @RequestParam("keywordsUser") Optional<String> key,
+	private String deleteUser(@PathVariable("ID_User") Long id, @RequestParam("keywordsUser") Optional<String> key,
 			@RequestParam("p") Optional<Integer> p, @ModelAttribute("user") Users user, Model model) {
 		dao.deleteById(id);
 		model.addAttribute("message", "Thành công!");

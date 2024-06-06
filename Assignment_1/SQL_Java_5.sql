@@ -14,7 +14,7 @@ CREATE TABLE Users (
 );
 ALTER TABLE Users
 ADD CONSTRAINT unique_username UNIQUE (Username);
-DELETE FROM Users WHERE ID_User = 10;
+DELETE FROM Users WHERE ID_User = 46;
 
 INSERT INTO Users (Username, Password, Fullname, Email, Phone, Gender, Birthday, Role)
 VALUES 
@@ -70,7 +70,7 @@ CREATE TABLE Products (
 	Note NVARCHAR(20),
     CONSTRAINT FK_CategoryID FOREIGN KEY (CategoryID) REFERENCES Categories(CategoryID)
 );
-
+DELETE FROM Products WHERE ProductID = 29;
 ALTER TABLE Products DROP COLUMN product_title;
 ALTER TABLE Products CHANGE ProductTitle product_title NVARCHAR(255) NOT NULL;
 
@@ -92,7 +92,7 @@ VALUES
 
 INSERT INTO Products (product_title, Price, ImageURL, Quantity, CategoryID, Sale, Note)
 VALUES
-(N'Bút kẻ mắt NYX 11', 450000, N'product_13.jpg', 300, N'TD', 0, null),
+(N'Bút kẻ mắt NYX 11', 450000, N'product_12.jpg', 300, N'TD', 0, null),
 (N'Bảng phấn Stila Sending', 560000, N'product_14.jpg', 350, N'TD', 5, null),
 (N'Bảng phấn mắt Colourpop', 430000, N'product_15.jpg', 300, N'TD', 0, null),
 (N'Phấn mắt FACE IT', 399000, N'product_16.jpg', 100, N'TD', 10, null),

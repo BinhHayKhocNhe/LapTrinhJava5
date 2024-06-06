@@ -59,24 +59,24 @@
 									<li class="list-group-item">Dược Mỹ Phẩm</li>
 									<li class="list-group-item" type="button"
 										data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-										<a href="" class="">Trang Điểm</a> <i
+										<a href="/TrangDiem" class="">Trang Điểm</a> <i
 										class="bi bi-chevron-down"></i>
 										<ul id="collapseTwo"
-											class=" list-group list-group-flush accordion-collapse collapse">
+											class="list-group list-group-flush accordion-collapse collapse">
 											<li class="list-group-item" type="button"
 												data-bs-toggle="collapse" data-bs-target="#collapseThree">
 												<a href="">Trang Điểm Mặt</a> <i class="bi bi-chevron-down"></i>
 												<ul id="collapseThree"
-													class=" list-group list-group-flush accordion-collapse collapse">
-													<li class="list-group-item"><a class="nav-link "
-														href="">Kem Dưỡng</a></li>
-													<li class="list-group-item"><a class="nav-link "
+													class="list-group list-group-flush accordion-collapse collapse">
+													<li href="/TrangDiem" class="list-group-item"><a
+														class="nav-link" href="">Kem Dưỡng</a></li>
+													<li class="list-group-item"><a class="nav-link"
 														href="">Sữa Rửa Mặt</a></li>
-													<li class="list-group-item"><a class="nav-link "
+													<li class="list-group-item"><a class="nav-link"
 														href="">Kem Chống Nắng</a></li>
 												</ul>
 											</li>
-											<li class="list-group-item"><a class="nav-link " href="">Trang
+											<li class="list-group-item"><a class="nav-link" href="">Trang
 													Điểm Mắt</a></li>
 										</ul>
 									</li>
@@ -147,7 +147,8 @@
 						</div>
 						<div class="col-8">
 							<div style="margin-top: 29px;">
-								<a class="detail-hover" href="">Mặc nạ ngủ chăm sóc da mặt</a>
+								<a class="detail-hover" href="ProductDetail">Mặc nạ ngủ chăm
+									sóc da mặt</a>
 								<h6 class="fw-bold" style="color: #61c472;">650,000 đ</h6>
 							</div>
 						</div>
@@ -234,8 +235,9 @@
 						<a href="#" class="">
 							<div class="card product-media">
 								<div class="">
-									<a href=""><img th:src="@{'/img/' + ${product.ImageURL}}"
-										class="card-img-top" alt="..."></a>
+									<a th:href="@{'/ProductDetail?id=' + ${product.ProductID}}"><img
+										th:src="@{'/img/' + ${product.ImageURL}}" class="card-img-top"
+										alt="..."></a>
 								</div>
 								<div class="card-body text-center w-100 product-caption">
 									<a href="#">
@@ -260,8 +262,7 @@
 						<li class="page-item"><a class="page-link"
 							th:href="@{/DuocMyPham(p=0)}">Đầu tiên</a></li>
 						<li class="page-item" th:if="${page.number > 1}"><a
-							class="page-link"
-							th:href="@{/DuocMyPham(p=${page.number - 1})}">&laquo;</a></li>
+							class="page-link" th:href="@{/DuocMyPham(p=${page.number - 1})}">&laquo;</a></li>
 						<li class="page-item" th:if="${page.number > 2}"><span
 							class="page-link">...</span></li>
 						<li class="page-item"
@@ -271,11 +272,9 @@
 						<li class="page-item" th:if="${page.number < page.totalPages - 3}"><span
 							class="page-link">...</span></li>
 						<li class="page-item" th:if="${page.number < page.totalPages - 1}"><a
-							class="page-link"
-							th:href="@{/DuocMyPham(p=${page.number + 1})}">&raquo;</a></li>
+							class="page-link" th:href="@{/DuocMyPham(p=${page.number + 1})}">&raquo;</a></li>
 						<li class="page-item"><a class="page-link"
-							th:href="@{/DuocMyPham(p=${page.totalPages - 1})}">Cuối
-								cùng</a></li>
+							th:href="@{/DuocMyPham(p=${page.totalPages - 1})}">Cuối cùng</a></li>
 					</ul>
 				</nav>
 			</div>

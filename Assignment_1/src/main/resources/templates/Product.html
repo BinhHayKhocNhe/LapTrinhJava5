@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Quản lí người dùng</title>
+<title>Quản lí sản phẩm</title>
 <link rel="icon"
 	href="https://phuongnamvina.com/img_data/images/lam-logo-ban-hang-online-dep.jpg">
 <link
@@ -40,46 +40,53 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-3 col-md-12 col-sm-12 border p-3 rounded-3 mt-3">
-				<form>
+				<form th:action="@{/formUser}" method="post" th:object="${product}"
+					enctype="multipart/form-data">
 					<div class="mb-2">
 						<label for="exampleInputEmail1" class="form-label">ID:</label> <input
-							type="text" class="form-control" disabled>
+							type="text" class="form-control" th:field="*{ProductID}"
+							readonly="readonly">
 					</div>
 					<div class="mb-2">
 						<label for="exampleInputEmail1" class="form-label">Tên sản
-							phẩm:</label> <input type="text" class="form-control" required>
+							phẩm:</label> <input type="text" class="form-control"
+							th:field="*{ProductTitle}" required>
 					</div>
 					<div class="mb-2">
 						<label for="exampleInputPassword1" class="form-label">Giá:</label>
-						<input type="number" min="1" class="form-control" required>
+						<input type="number" min="1" class="form-control"
+							th:field="*{Price}" required>
 					</div>
 					<div class="mb-2">
 						<label for="exampleInputEmail1" class="form-label">Số
-							lượng:</label> <input type="number" min="1" class="form-control" required>
+							lượng:</label> <input type="number" min="1" th:field="*{Quantity}"
+							class="form-control" required>
 					</div>
 					<div class="mb-2">
 						<label for="exampleInputEmail1" class="form-label">Loại:</label> <input
-							type="text" class="form-control" required>
+							type="text" th:field="*{CategoryID}" class="form-control"
+							required>
 					</div>
 					<div class="mb-2">
 						<label for="exampleInputEmail1" class="form-label">Giảm
-							giá (%):</label> <input type="number" class="form-control" min="0"
-							max="100" required>
+							giá (%):</label> <input type="number" th:field="*{Sale}"
+							class="form-control" min="0" max="100" required>
 					</div>
 					<div class="mb-2">
 						<label for="exampleInputEmail1" class="form-label">Hình
-							ảnh:</label> <input type="file" class="form-control" required>
+							ảnh:</label> <input type="file" class="form-control" name="attach"
+							required>
 					</div>
 					<div class="mb-2">
 						<div class="form-floating">
 							<textarea class="form-control" placeholder="Leave a comment here"
-								id="floatingTextarea2" style="height: 80px"></textarea>
+								id="floatingTextarea2" th:field="*{Note}" style="height: 80px"></textarea>
 							<label for="floatingTextarea2">Ghi chú</label>
 						</div>
 					</div>
 					<div>
-						<button type="button" class="btn btn-primary"
-							id="liveToastBtnProduct">Thêm</button>
+						<button type="submit" formaction="/addProduct"
+							class="btn btn-primary" id="liveToastBtnProduct">Thêm</button>
 						<div class="toast-container position-fixed bottom-0 end-0 p-3">
 							<div id="liveToastProduct" class="toast" role="alert"
 								aria-live="assertive" aria-atomic="true">
@@ -89,12 +96,17 @@
 									<button type="button" class="btn-close" data-bs-dismiss="toast"
 										aria-label="Close"></button>
 								</div>
-								<div class="toast-body">Trạng thái thành công</div>
+								<div class="toast-body" th:if="${error} != null">
+									<span th:text="${error}"></span>
+								</div>
+								<div class="toast-body" th:if="${message} != null">
+									<span th:text="${message}"></span>
+								</div>
 							</div>
 						</div>
 
-						<button type="button" class="btn btn-danger"
-							id="liveToastBtnDelete_Product">Xóa</button>
+						<a th:href="@{'/deleteProduct/' + ${ProductID}}"
+							class="btn btn-danger" id="liveToastBtnDelete_Product">Xóa</a>
 						<div class="toast-container position-fixed bottom-0 end-0 p-3">
 							<div id="liveToastDelete_Product" class="toast" role="alert"
 								aria-live="assertive" aria-atomic="true">
@@ -104,12 +116,17 @@
 									<button type="button" class="btn-close" data-bs-dismiss="toast"
 										aria-label="Close"></button>
 								</div>
-								<div class="toast-body">Trạng thái thành công</div>
+								<div class="toast-body" th:if="${error} != null">
+									<span th:text="${error}"></span>
+								</div>
+								<div class="toast-body" th:if="${message} != null">
+									<span th:text="${message}"></span>
+								</div>
 							</div>
 						</div>
 
-						<button type="button" class="btn btn-warning"
-							id="liveToastBtnUpdate_Product">Sửa</button>
+						<button type="submit" formaction="/updateProduct"
+							class="btn btn-warning" id="liveToastBtnUpdate_Product">Sửa</button>
 						<div class="toast-container position-fixed bottom-0 end-0 p-3">
 							<div id="liveToastUpdate_Product" class="toast" role="alert"
 								aria-live="assertive" aria-atomic="true">
@@ -119,9 +136,15 @@
 									<button type="button" class="btn-close" data-bs-dismiss="toast"
 										aria-label="Close"></button>
 								</div>
-								<div class="toast-body">Trạng thái thành công</div>
+								<div class="toast-body" th:if="${error} != null">
+									<span th:text="${error}"></span>
+								</div>
+								<div class="toast-body" th:if="${message} != null">
+									<span th:text="${message}"></span>
+								</div>
 							</div>
 						</div>
+						<a href="/Product" class="btn btn-secondary">Làm mới</a>
 					</div>
 				</form>
 			</div>
@@ -142,7 +165,9 @@
 								th:text="${#numbers.formatInteger(product.Price,3,'POINT')}+ 'đ'"></td>
 							<td th:text="${product.CategoryID}"></td>
 							<td><a class="text-primary text-decoration-underline me-3"
-								href="#"> Xem thông tin </a> <a href="#"
+								th:href="@{'/editProduct/' + ${product.ProductID}}"> Xem
+									thông tin </a> <a
+								th:href="@{'/deleteProduct/' + ${product.ProductID}}"
 								class="text-decoration-underline text-danger">Xóa</a></td>
 						</tr>
 					</tbody>

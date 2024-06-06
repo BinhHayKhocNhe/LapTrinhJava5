@@ -66,11 +66,10 @@ public class Home_Controler {
 	}
 
 	@GetMapping("/ProductDetail")
-	public String ProductDetail(Model model,@RequestParam("id") Long id ) {
+	public String ProductDetail(Model model, @RequestParam("id") Long id) {
 		Products productDetail = productDAO.findByID(id);
-		model.addAttribute("productDetail",productDetail);
+		model.addAttribute("productDetail", productDetail);
 		return "ProductDetail";
 	}
-
 
 }

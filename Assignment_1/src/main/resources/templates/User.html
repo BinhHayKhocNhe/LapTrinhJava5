@@ -38,62 +38,76 @@
 		</div>
 	</form>
 	<div class="container">
-
 		<div class="row">
 			<div class="col-lg-3 col-md-12 col-sm-12 border p-3 rounded-3 mt-3">
-				<form>
+				<form th:action="@{/formUser}" method="post" th:object="${user}">
 					<div class="mb-2">
 						<label for="exampleInputEmail1" class="form-label">ID:</label> <input
-							type="text" class="form-control" disabled>
+							type="text" class="form-control" th:field="*{ID_User}"
+							readonly="readonly">
 					</div>
 					<div class="mb-2">
-						<label for="exampleInputEmail1" class="form-label">Tài
-							khoản:</label> <input type="text" class="form-control" required>
+						<label for="Username" class="form-label">Tài khoản:</label> <input
+							type="text" id="Username" class="form-control"
+							th:field="*{Username}"> <small class="text-danger"
+							th:if="${#fields.hasErrors('Username')}" th:errors="*{Username}"></small>
 					</div>
 					<div class="mb-2">
 						<label for="exampleInputPassword1" class="form-label">Mật
-							khẩu:</label> <input type="password" class="form-control" required>
+							khẩu:</label> <input type="password" class="form-control"
+							th:field="*{Password}" required>
 					</div>
 					<div class="mb-2">
 						<label for="exampleInputEmail1" class="form-label">Họ tên:</label>
-						<input type="text" class="form-control" required>
+						<input type="text" class="form-control" th:field="*{Fullname}"
+							required>
 					</div>
 					<div class="mb-2">
 						<label for="exampleInputEmail1" class="form-label">Email:</label>
-						<input type="email" class="form-control" required>
+						<input type="email" class="form-control" th:field="*{Email}"
+							required>
 					</div>
 					<div class="mb-2">
 						<label for="exampleInputEmail1" class="form-label">Số điện
-							thoại:</label> <input type="number" class="form-control" min="1" required>
+							thoại:</label> <input type="number" class="form-control" min="1"
+							th:field="*{Phone}" required>
 					</div>
 					<div class="d-flex mb-2">
 						<div class="me-3">Giới tính:</div>
 						<div class="form-check me-2">
-							<input class="form-check-input" type="radio" checked> <label
-								class="form-check-label"> Nam </label>
+							<input class="form-check-input" type="radio" value="true"
+								th:field="*{Gender}"> <label class="form-check-label">
+								Nam </label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio"> <label
+							<input class="form-check-input" th:field="*{Gender}"
+								value="false" type="radio"> <label
 								class="form-check-label"> Nữ </label>
 						</div>
 					</div>
 					<div class="mb-2">
 						<label for="exampleInputEmail1" class="form-label">Ngày
-							sinh:</label> <input type="date" class="form-control" min="1" required>
+							sinh:</label> <input type="date" class="form-control"
+							th:field="*{Birthday}" required>
 					</div>
+
 					<div class="d-flex mb-2">
 						<div class="me-3">Vai trò:</div>
 						<div class="form-check me-2">
-							<input class="form-check-input" type="radio" checked> <label
+							<input class="form-check-input" type="radio" name="role"
+								th:field="*{Role}" value="Admin"><label
 								class="form-check-label"> Admin </label>
 						</div>
 						<div class="form-check">
-							<input class="form-check-input" type="radio"> <label
+							<input class="form-check-input" type="radio" name="role"
+								th:field="*{Role}" value="User"> <label
 								class="form-check-label"> User </label>
 						</div>
 					</div>
+
 					<div>
-						<button type="button" class="btn btn-primary" id="liveToastBtn">Thêm</button>
+						<button type="submit" class="btn btn-primary"
+							formaction="/addUser" id="liveToastBtn">Thêm</button>
 						<div class="toast-container position-fixed bottom-0 end-0 p-3">
 							<div id="liveToast" class="toast" role="alert"
 								aria-live="assertive" aria-atomic="true">
@@ -103,12 +117,17 @@
 									<button type="button" class="btn-close" data-bs-dismiss="toast"
 										aria-label="Close"></button>
 								</div>
-								<div class="toast-body">Trạng thái thành công</div>
+								<div class="toast-body" th:if="${error} != null">
+									<span th:text="${error}"></span>
+								</div>
+								<div class="toast-body" th:if="${message} != null">
+									<span th:text="${message}"></span>
+								</div>
 							</div>
 						</div>
 
-						<button type="button" class="btn btn-danger"
-							id="liveToastBtnDelete">Xóa</button>
+						<a th:href="@{'/deleteUser/' + ${ID_User}}" class="btn btn-danger"
+							id="liveToastBtnDelete">Xóa</a>
 						<div class="toast-container position-fixed bottom-0 end-0 p-3">
 							<div id="liveToastDelete" class="toast" role="alert"
 								aria-live="assertive" aria-atomic="true">
@@ -118,12 +137,14 @@
 									<button type="button" class="btn-close" data-bs-dismiss="toast"
 										aria-label="Close"></button>
 								</div>
-								<div class="toast-body">Trạng thái thành công</div>
+								<div class="toast-body" th:if="${message} != null">
+									<span th:text="${message}"></span>
+								</div>
 							</div>
 						</div>
 
-						<button type="button" class="btn btn-warning"
-							id="liveToastBtnUpdate">Sửa</button>
+						<button type="submit" formaction="/updateUser"
+							class="btn btn-warning" id="liveToastBtnUpdate">Sửa</button>
 						<div class="toast-container position-fixed bottom-0 end-0 p-3">
 							<div id="liveToastUpdate" class="toast" role="alert"
 								aria-live="assertive" aria-atomic="true">
@@ -133,9 +154,15 @@
 									<button type="button" class="btn-close" data-bs-dismiss="toast"
 										aria-label="Close"></button>
 								</div>
-								<div class="toast-body">Trạng thái thành công</div>
+								<div class="toast-body" th:if="${error} != null">
+									<span th:text="${error}"></span>
+								</div>
+								<div class="toast-body" th:if="${message} != null">
+									<span th:text="${message}"></span>
+								</div>
 							</div>
 						</div>
+						<a href="/User" class="btn btn-secondary">Làm mới</a>
 					</div>
 				</form>
 			</div>
@@ -157,8 +184,9 @@
 							<td th:text="${user.Fullname}"></td>
 							<td th:text="${user.Role}"></td>
 							<td><a class="text-primary text-decoration-underline me-3"
-								th:href="@{'/edit/' + ${user.ID_User}}"> Xem thông tin </a> <a
-								href="#" class="text-decoration-underline text-danger">Xóa</a></td>
+								th:href="@{'/editUser/' + ${user.ID_User}}"> Xem thông tin </a>
+								<a th:href="@{'/deleteUser/' + ${user.ID_User}}"
+								class="text-decoration-underline text-danger">Xóa</a></td>
 						</tr>
 					</tbody>
 				</table>

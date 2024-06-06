@@ -2,6 +2,7 @@ package com.Asm.Model;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,15 +23,16 @@ public class Users {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ID_User;
+
 	private String Username;
 	private String Password;
 	private String Fullname;
 	private String Email;
 	private String Phone;
-	private boolean Gender;
+	private boolean Gender = true;
 
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date Birthday;
-
 	private String Role;
 }

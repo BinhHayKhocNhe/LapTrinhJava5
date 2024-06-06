@@ -12,6 +12,10 @@ CREATE TABLE Users (
     Birthday DATE NOT NULL,
     Role NVARCHAR(20) NOT NULL
 );
+ALTER TABLE Users
+ADD CONSTRAINT unique_username UNIQUE (Username);
+DELETE FROM Users WHERE ID_User = 10;
+
 INSERT INTO Users (Username, Password, Fullname, Email, Phone, Gender, Birthday, Role)
 VALUES 
     ('user1', 'password1', N'Đỗ Mỹ Thuận', 'user1@example.com', '123456789', 1, '2000-01-01', 'User'),
@@ -22,6 +26,30 @@ VALUES
     ('user6', 'password6', N'Phạm Thị Hương', 'user6@example.com', '333333333', 0, '1985-11-05', 'Admin'),
     ('user7', 'password7', N'Bùi Thị An', 'user7@example.com', '444444444', 0, '1990-06-25', 'User'),
     ('user8', 'password8', N'Vũ Thị Trang', 'user8@example.com', '555555555', 0, '1996-12-10', 'User');
+INSERT INTO Users (Username, Password, Fullname, Email, Phone, Gender, Birthday, Role) 
+VALUES 
+('user7', 'password7', 'User Seven', 'user7@example.com', '123456785', 1, '1975-02-05', 'User'),
+('user8', 'password8', 'User Eight', 'user8@example.com', '123456786', 0, '1990-08-15', 'User'),
+('user9', 'password9', 'User Nine', 'user9@example.com', '123456787', 1, '1989-06-20', 'Admin'),
+('user10', 'password10', 'User Ten', 'user10@example.com', '123456788', 0, '1985-03-15', 'User'),
+('user11', 'password11', 'User Eleven', 'user11@example.com', '123456789', 1, '1982-12-10', 'User'),
+('user12', 'password12', 'User Twelve', 'user12@example.com', '123456780', 0, '1979-10-05', 'Admin'),
+('user13', 'password13', 'User Thirteen', 'user13@example.com', '123456781', 1, '1974-07-01', 'User'),
+('user14', 'password14', 'User Fourteen', 'user14@example.com', '123456782', 0, '1988-04-20', 'User'),
+('user15', 'password15', 'User Fifteen', 'user15@example.com', '123456783', 1, '1981-11-15', 'Admin');
+INSERT INTO Users (Username, Password, Fullname, Email, Phone, Gender, Birthday, Role) 
+VALUES 
+('user16', 'password16', 'User Sixteen', 'user16@example.com', '123456784', 1, '1975-02-05', 'User'),
+('user17', 'password17', 'User Seventeen', 'user17@example.com', '123456785', 0, '1990-08-15', 'User'),
+('user18', 'password18', 'User Eighteen', 'user18@example.com', '123456786', 1, '1989-06-20', 'Admin'),
+('user19', 'password19', 'User Nineteen', 'user19@example.com', '123456787', 0, '1985-03-15', 'User'),
+('user20', 'password20', 'User Twenty', 'user20@example.com', '123456788', 1, '1982-12-10', 'User'),
+('user21', 'password21', 'User Twenty One', 'user21@example.com', '123456789', 0, '1979-10-05', 'Admin'),
+('user22', 'password22', 'User Twenty Two', 'user22@example.com', '123456780', 1, '1974-07-01', 'User'),
+('user23', 'password23', 'User Twenty Three', 'user23@example.com', '123456781', 0, '1988-04-20', 'User'),
+('user24', 'password24', 'User Twenty Four', 'user24@example.com', '123456782', 1, '1981-11-15', 'Admin'),
+('user25', 'password25', 'User Twenty Five', 'user25@example.com', '123456783', 0, '1986-09-25', 'User');
+
 CREATE TABLE Categories (
     CategoryID NVARCHAR(20) PRIMARY KEY,
     CategoryName NVARCHAR(100) NOT NULL,

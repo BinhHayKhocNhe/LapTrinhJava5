@@ -28,7 +28,7 @@ public class Student {
 	private Double marks;
 
 	@NotNull
-	private Boolean gender = true;
+	private boolean gender = true;
 
 	@NotBlank
 	private String faculty;

@@ -10,22 +10,16 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.Asm.DAO.ProductDAO;
-import com.Asm.DAO.UserDAO;
 import com.Asm.Model.Products;
-import com.Asm.Model.Users;
+
 
 @Controller
 public class Home_Controler {
 	@Autowired
 	private ProductDAO productDAO = null;
-
-	@Autowired
-	private UserDAO userDAO = null;
 
 	@GetMapping("/")
 	public String index() {
@@ -62,9 +56,5 @@ public class Home_Controler {
 		return "SignIn";
 	}
 
-	@GetMapping("/SignUp")
-	public String SignUp() {
-		return "SignUp";
-	}
 
 }

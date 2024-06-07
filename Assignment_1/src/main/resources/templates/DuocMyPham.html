@@ -139,21 +139,20 @@
 						<h5 style="color: #333;" class="fs-6 fw-bold ">Sản Phẩm Bán
 							Chạy</h5>
 					</div>
-					<div class="row mt-3 border-dashed mb-2 pb-2">
-						<div class="col-4">
-							<img width="80px"
-								src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190402_cVcXxVY597qDDD9nEwNNgtPF.jpg"
-								alt="">
-						</div>
-						<div class="col-8">
-							<div style="margin-top: 29px;">
-								<a class="detail-hover" href="ProductDetail">Mặc nạ ngủ chăm
-									sóc da mặt</a>
-								<h6 class="fw-bold" style="color: #61c472;">650,000 đ</h6>
+					<div class="row mt-3 border-dashed mb-2 pb-2" th:each="productList : ${list}">
+							<div class="col-4">
+								<img width="80px"
+									th:src="@{'/img/' + ${productList.ImageURL}}"
+									alt="">
 							</div>
-						</div>
+							<div class="col-8">
+								<div style="margin-top: 29px;">
+									<a class="detail-hover" href="ProductDetail" th:href="@{'/ProductDetail/' + ${productList.ProductID}}" th:text="${productList.ProductTitle}"></a>
+									<h6 class="fw-bold" style="color: #61c472;" th:text="${#numbers.formatInteger(productList.Price,3,'POINT')}+ 'đ'"></h6>
+								</div>
+							</div>
 					</div>
-					<div class="row mt-3 border-dashed mb-2 pb-2">
+					<!-- <div class="row mt-3 border-dashed mb-2 pb-2">
 						<div class="col-4">
 							<img width="80px"
 								src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190402_jiGhXSgaEbxNh1m1aWrgH7pj.jpg"
@@ -204,7 +203,7 @@
 								<h6 class="fw-bold" style="color: #61c472;">650,000 đ</h6>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
 				</div>
 			</div>
@@ -235,7 +234,7 @@
 						<a href="#" class="">
 							<div class="card product-media">
 								<div class="">
-									<a th:href="@{'/ProductDetail?id=' + ${product.ProductID}}"><img
+									<a th:href="@{'/ProductDetail/' + ${product.ProductID}}"><img
 										th:src="@{'/img/' + ${product.ImageURL}}" class="card-img-top"
 										alt="..."></a>
 								</div>

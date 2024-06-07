@@ -76,11 +76,12 @@
 		<div class="row">
 			<div class="col-lg-3 col-md-6 col-sm-12 mb-4 product"
 				th:each="product : ${topProducts}">
-				<a href="#" class="">
+				<a class="">
 					<div class="card product-media">
 						<div class="">
-							<a href=""><img th:src="@{'/img/' + ${product.ImageURL}}"
-								class="card-img-top" alt="..."></a>
+							<a th:href="@{'/ProductDetail/' + ${product.ProductID}}"><img
+								th:src="@{'/img/' + ${product.ImageURL}}" class="card-img-top"
+								alt="..."></a>
 						</div>
 						<div class="card-body text-center w-100 product-caption">
 							<a href="#">
@@ -199,11 +200,12 @@
 		<div class="row">
 			<div class="col-lg-3 col-md-6 col-sm-12 mb-4 product"
 				th:each="product : ${topSelling}">
-				<a href="#" class="">
+				<a class="">
 					<div class="card product-media">
 						<div class="">
-							<a href=""><img th:src="@{'/img/' + ${product.ImageURL}}"
-								class="card-img-top" alt="..."></a>
+							<a th:href="@{'/ProductDetail/' + ${product.ProductID}}"><img
+								th:src="@{'/img/' + ${product.ImageURL}}" class="card-img-top"
+								alt="..."></a>
 						</div>
 						<div class="card-body text-center w-100 product-caption">
 							<a href="#">

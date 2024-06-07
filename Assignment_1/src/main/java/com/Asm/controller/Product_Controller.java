@@ -1,15 +1,10 @@
 package com.Asm.controller;
-
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +26,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.Asm.DAO.ProductDAO;
 import com.Asm.Model.Products;
 import com.Asm.Utils.SessionService;
-
-import jakarta.servlet.http.HttpServletRequest;
 
 @Controller
 public class Product_Controller {

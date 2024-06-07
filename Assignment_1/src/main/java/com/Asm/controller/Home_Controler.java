@@ -70,13 +70,13 @@ public class Home_Controler {
 		return "SignUp";
 	}
 
+
 	@GetMapping(value = "/ProductDetail/{ProductID}")
 	public String ProductDetail(Model model,@PathVariable("ProductID") Long id ) {
 		Products productDetail = productDAO.findByID(id);
-		model.addAttribute("productDetail",productDetail);
+		model.addAttribute("productDetail", productDetail);
 		return "ProductDetail";
 	}
 	
-
 
 }

@@ -17,9 +17,12 @@ public interface ProductDAO extends JpaRepository<Products, Long> {
 	@Query("SELECT p FROM Products p WHERE p.CategoryID = 'TD'")
 	Page<Products> findByCategoryIdCustomTD(Pageable pageable);
 
-	@Query(value = "SELECT * FROM Products WHERE product_title LIKE ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM Products WHERE product_title LIKE ?1 ORDER BY ProductID DESC", nativeQuery = true)
 	Page<Products> findByKeywords(String tiltle, Pageable pageable);
-	
+
 	@Query(value = "SELECT * FROM Products WHERE ProductID = :id", nativeQuery = true)
 	Products findByID(@Param("id") Long id);
+
+	@Query(value = "SELECT * FROM Products ORDER BY RAND() LIMIT ?1", nativeQuery = true)
+	List<Products> selectRandom(int number);
 }

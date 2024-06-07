@@ -24,14 +24,20 @@ public class Home_Controler {
 	@Autowired
 	private UserDAO userDAO = null;
 
+	private Pageable pageable = null;
+
 	@GetMapping("/")
-	public String index() {
+	public String index(Model model) {
+		List<Products> topProducts = productDAO.selectRandom(4);
+		List<Products> topSelling  = productDAO.selectRandom(4);
+		model.addAttribute("topProducts", topProducts);
+		model.addAttribute("topSelling", topSelling);
 		return "index";
 	}
 
 	@GetMapping("/DuocMyPham")
 	public String duocMyPham(Model model, @RequestParam("p") Optional<Integer> p) {
-		Pageable pageable = PageRequest.of(p.orElse(0), 6);
+		pageable = PageRequest.of(p.orElse(0), 6);
 		Page<Products> page = productDAO.findByCategoryIdCustom(pageable);
 		model.addAttribute("page", page);
 		return "DuocMyPham";
@@ -49,7 +55,7 @@ public class Home_Controler {
 
 	@GetMapping("/TrangDiem")
 	public String TrangDiem(Model model, @RequestParam("p") Optional<Integer> p) {
-		Pageable pageable = PageRequest.of(p.orElse(0), 6);
+		pageable = PageRequest.of(p.orElse(0), 6);
 		Page<Products> productList = productDAO.findByCategoryIdCustomTD(pageable);
 		model.addAttribute("products", productList);
 		return "TrangDiem";

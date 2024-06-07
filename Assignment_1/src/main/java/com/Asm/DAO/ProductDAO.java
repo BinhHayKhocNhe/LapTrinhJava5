@@ -22,4 +22,8 @@ public interface ProductDAO extends JpaRepository<Products, Long> {
 	
 	@Query(value = "SELECT * FROM Products WHERE ProductID = :id", nativeQuery = true)
 	Products findByID(@Param("id") Long id);
+	
+	@Query(value = "SELECT TOP (?1) * FROM Products ORDER BY NEWID()", nativeQuery = true)
+	List<Products> selectRandom( int number);
+	
 }

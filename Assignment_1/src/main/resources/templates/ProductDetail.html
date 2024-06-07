@@ -40,7 +40,8 @@
 			<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 				<ol class="breadcrumb m-0">
 					<li class="breadcrumb-item bre"><a href="/">Trang Chủ</a></li>
-					<li class="breadcrumb-item active" aria-current="page" th:text="${productDetail.ProductTitle}"></li>
+					<li class="breadcrumb-item active" aria-current="page"
+						th:text="${productDetail.ProductTitle}"></li>
 				</ol>
 			</nav>
 		</div>
@@ -49,14 +50,14 @@
 		<article>
 			<section class="section productDetail" aria-label="productDetail">
 				<div class="container">
-					<div class="row" >
+					<div class="row">
 						<div class="col-lg-6">
 							<div class="productDetail-slides border-dashed-right">
 								<div class="slider-banner">
 									<figure
 										class="productDetail-banner d-flex justify-content-center">
-										<img th:src="@{'/img/' + ${productDetail.ImageURL}}" width="200"
-											loading="" alt="" class="img-cover">
+										<img th:src="@{'/img/' + ${productDetail.ImageURL}}"
+											width="200" loading="" alt="" class="img-cover">
 									</figure>
 								</div>
 							</div>
@@ -66,19 +67,21 @@
 								<!-- <p class="productDetail-subtitle">Serum bảo vệ da, chống tia
 									UV</p>
  -->
-								<h1 class="h1 productDetail-title" th:text="${productDetail.ProductTitle}"></h1>
+								<h1 class="h1 productDetail-title"
+									th:text="${productDetail.ProductTitle}"></h1>
 
-								<p class="productDetail-text">Serum bảo vệ da khỏi ánh sáng
+								<!-- <p class="productDetail-text">Serum bảo vệ da khỏi ánh sáng
 									xanh, tia UV và ô nhiễm môi trường Nescens High-Power Defence
 									Booster giúp tạo ra hàng rào bảo vệ da khỏi các tác hại từ ánh
 									sáng xanh, tia UV cho làn da tươi sáng và mịn màng hơn.</p>
-
+ -->
 								<div class="wrapper">
 									<span class="price"
 										th:text="${#numbers.formatInteger(productDetail.Price*(100 - productDetail.Sale)/100,3,'POINT')}+ 'đ'"
-										data-total-price></span> <span
-										class="badge" th:text="${productDetail.Sale} + '%'"></span>  
-									<del class="del" th:text="${#numbers.formatInteger(productDetail.Price,3,'POINT')}+ 'đ'"></del>
+										data-total-price></span> <span class="badge"
+										th:text="${productDetail.Sale} + '%'"></span>
+									<del class="del"
+										th:text="${#numbers.formatInteger(productDetail.Price,3,'POINT')}+ 'đ'"></del>
 								</div>
 
 								<div class="btn-group">
@@ -207,6 +210,10 @@
 	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule
 	src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
 
 
 </html>

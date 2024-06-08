@@ -139,18 +139,21 @@
 						<h5 style="color: #333;" class="fs-6 fw-bold ">Sản Phẩm Bán
 							Chạy</h5>
 					</div>
-					<div class="row mt-3 border-dashed mb-2 pb-2" th:each="productList : ${list}">
-							<div class="col-4">
-								<img width="80px"
-									th:src="@{'/img/' + ${productList.ImageURL}}"
-									alt="">
+					<div class="row mt-3 border-dashed mb-2 pb-2"
+						th:each="productList : ${list}">
+						<div class="col-4">
+							<img width="80px" th:src="@{'/img/' + ${productList.ImageURL}}"
+								alt="">
+						</div>
+						<div class="col-8">
+							<div style="margin-top: 29px;">
+								<a class="detail-hover" href="ProductDetail"
+									th:href="@{'/ProductDetail/' + ${productList.ProductID}}"
+									th:text="${productList.ProductTitle}"></a>
+								<h6 class="fw-bold" style="color: #61c472;"
+									th:text="${#numbers.formatInteger(productList.Price,3,'POINT')}+ 'đ'"></h6>
 							</div>
-							<div class="col-8">
-								<div style="margin-top: 29px;">
-									<a class="detail-hover" href="ProductDetail" th:href="@{'/ProductDetail/' + ${productList.ProductID}}" th:text="${productList.ProductTitle}"></a>
-									<h6 class="fw-bold" style="color: #61c472;" th:text="${#numbers.formatInteger(productList.Price,3,'POINT')}+ 'đ'"></h6>
-								</div>
-							</div>
+						</div>
 					</div>
 					<!-- <div class="row mt-3 border-dashed mb-2 pb-2">
 						<div class="col-4">
@@ -215,17 +218,23 @@
 					</div>
 					<div class="col-3 col-sm-5 d-flex justify-content-end pe-0">
 						<h6 class="lable-DPM fw-bold d-none d-lg-block">Sắp xếp</h6>
-						<select class="form-select" style="width: 150px;"
-							aria-label="Default select example">
-							<option selected>Mặc Định</option>
-							<option value="1">Giá tăng dần
-								<nav></nav>
-							</option>
-							<option value="2">Giá giảm dần</option>
-							<option value="3">Sale</option>
-							<option value="1">A → Z</option>
-							<option value="2">Z → A</option>
-						</select>
+						<form action="/TrangDiem" method="GET" id="submitSort">
+							<select class="form-select" style="width: 150px;"
+								aria-label="Default select example" name="sort"
+								onchange="this.form.submit()">
+								<option value="ProductID" th:selected="${sort == 'ProductID'}">Mặc
+									Định</option>
+								<option value="priceAsc" th:selected="${sort == 'priceAsc'}">Giá
+									tăng dần</option>
+								<option value="priceDesc" th:selected="${sort == 'priceDesc'}">Giá
+									giảm dần</option>
+								<option value="sale" th:selected="${sort == 'sale'}">Sale</option>
+								<option value="nameAsc" th:selected="${sort == 'nameAsc'}">A
+									→ Z</option>
+								<option value="nameDesc" th:selected="${sort == 'nameDesc'}">Z
+									→ A</option>
+							</select>
+						</form>
 					</div>
 				</div>
 				<div class="row mt-3">
@@ -234,8 +243,9 @@
 						<a href="#" class="">
 							<div class="card product-media">
 								<div class="">
-									<a th:href="@{'/ProductDetail/' + ${product.ProductID}}"><img th:src="@{'/img/' + ${product.ImageURL}}"
-										class="card-img-top" alt="..."></a>
+									<a th:href="@{'/ProductDetail/' + ${product.ProductID}}"><img
+										th:src="@{'/img/' + ${product.ImageURL}}" class="card-img-top"
+										alt="..."></a>
 								</div>
 								<div class="card-body text-center w-100 product-caption">
 									<a href="#">
@@ -257,28 +267,30 @@
 						class="d-flex justify-content-center mb-3">
 						<ul class="pagination">
 							<li class="page-item"><a class="page-link"
-								th:href="@{/TrangDiem(p=0)}">Đầu tiên</a></li>
-							<li class="page-item" th:if="${products.number > 1}"><a
+								th:href="@{'/TrangDiem?p=0&sort=' + ${sort}}">Đầu tiên</a></li>
+							<li class="page-item" th:if="${products.number > 0}"><a
 								class="page-link"
-								th:href="@{/TrangDiem(p=${products.number - 1})}">&laquo;</a></li>
-							<li class="page-item" th:if="${products.number > 2}"><span
+								th:href="@{/TrangDiem(p=${products.number - 1}, sort=${sort})}">&laquo;</a></li>
+							<li class="page-item" th:if="${products.number > 1}"><span
 								class="page-link">...</span></li>
 							<li class="page-item"
-								th:each="i : ${#numbers.sequence(0, products.totalPages - 1)}"><a
-								class="page-link" th:href="@{/TrangDiem(p=${i})}"
-								th:text="${i + 1}"></a></li>
+								th:each="i : ${#numbers.sequence(0, products.totalPages - 1)}">
+								<a class="page-link"
+								th:href="@{/TrangDiem(p=${i}, sort=${sort})}" th:text="${i + 1}"></a>
+							</li>
 							<li class="page-item"
-								th:if="${products.number < products.totalPages - 3}"><span
+								th:if="${products.number < products.totalPages - 2}"><span
 								class="page-link">...</span></li>
 							<li class="page-item"
 								th:if="${products.number < products.totalPages - 1}"><a
 								class="page-link"
-								th:href="@{/TrangDiem(p=${products.number + 1})}">&raquo;</a></li>
+								th:href="@{/TrangDiem(p=${products.number + 1}, sort=${sort})}">&raquo;</a></li>
 							<li class="page-item"><a class="page-link"
-								th:href="@{/TrangDiem(p=${products.totalPages - 1})}">Cuối
+								th:href="@{/TrangDiem(p=${products.totalPages - 1}, sort=${sort})}">Cuối
 									cùng</a></li>
 						</ul>
 					</nav>
+
 				</div>
 			</div>
 		</div>
@@ -289,4 +301,9 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
+<script>
+	function SortChange() {
+		document.getElementById("submitSort").submit();
+	}
+</script>
 </html>

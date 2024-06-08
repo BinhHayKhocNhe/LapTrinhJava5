@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="/css/footer.css">
 <link rel="stylesheet" href="/css/DuocMyPham.css">
 <link rel="stylesheet" href="/css/home.css">
+
 </head>
 <body>
 	<div th:insert="fragments/header :: header"></div>
@@ -139,18 +140,21 @@
 						<h5 style="color: #333;" class="fs-6 fw-bold ">Sản Phẩm Bán
 							Chạy</h5>
 					</div>
-					<div class="row mt-3 border-dashed mb-2 pb-2" th:each="productList : ${list}">
-							<div class="col-4">
-								<img width="80px"
-									th:src="@{'/img/' + ${productList.ImageURL}}"
-									alt="">
+					<div class="row mt-3 border-dashed mb-2 pb-2"
+						th:each="productList : ${list}">
+						<div class="col-4">
+							<img width="80px" th:src="@{'/img/' + ${productList.ImageURL}}"
+								alt="">
+						</div>
+						<div class="col-8">
+							<div style="margin-top: 29px;">
+								<a class="detail-hover" href="ProductDetail"
+									th:href="@{'/ProductDetail/' + ${productList.ProductID}}"
+									th:text="${productList.ProductTitle}"></a>
+								<h6 class="fw-bold" style="color: #61c472;"
+									th:text="${#numbers.formatInteger(productList.Price,3,'POINT')}+ 'đ'"></h6>
 							</div>
-							<div class="col-8">
-								<div style="margin-top: 29px;">
-									<a class="detail-hover" href="ProductDetail" th:href="@{'/ProductDetail/' + ${productList.ProductID}}" th:text="${productList.ProductTitle}"></a>
-									<h6 class="fw-bold" style="color: #61c472;" th:text="${#numbers.formatInteger(productList.Price,3,'POINT')}+ 'đ'"></h6>
-								</div>
-							</div>
+						</div>
 					</div>
 					<!-- <div class="row mt-3 border-dashed mb-2 pb-2">
 						<div class="col-4">
@@ -215,17 +219,23 @@
 					</div>
 					<div class="col-3 col-sm-5 d-flex justify-content-end pe-0">
 						<h6 class="lable-DPM fw-bold d-none d-lg-block">Sắp xếp</h6>
-						<select class="form-select" style="width: 150px;"
-							aria-label="Default select example">
-							<option selected>Mặc Định</option>
-							<option value="1">Giá tăng dần
-								<nav></nav>
-							</option>
-							<option value="2">Giá giảm dần</option>
-							<option value="3">Sale</option>
-							<option value="1">A → Z</option>
-							<option value="2">Z → A</option>
-						</select>
+						<form action="/DuocMyPham" method="GET" id="submitSort">
+							<select class="form-select" style="width: 150px;"
+								aria-label="Default select example" name="sort"
+								onchange="this.form.submit()">
+								<option value="ProductID" th:selected="${sort == 'ProductID'}">Mặc
+									Định</option>
+								<option value="priceAsc" th:selected="${sort == 'priceAsc'}">Giá
+									tăng dần</option>
+								<option value="priceDesc" th:selected="${sort == 'priceDesc'}">Giá
+									giảm dần</option>
+								<option value="sale" th:selected="${sort == 'sale'}">Sale</option>
+								<option value="nameAsc" th:selected="${sort == 'nameAsc'}">A
+									→ Z</option>
+								<option value="nameDesc" th:selected="${sort == 'nameDesc'}">Z
+									→ A</option>
+							</select>
+						</form>
 					</div>
 				</div>
 				<div class="row mt-3">
@@ -258,24 +268,46 @@
 				<nav aria-label="Page navigation example"
 					class="d-flex justify-content-center mb-3">
 					<ul class="pagination">
+						<!-- Link to the first page -->
 						<li class="page-item"><a class="page-link"
-							th:href="@{/DuocMyPham(p=0)}">Đầu tiên</a></li>
+							th:href="@{'/DuocMyPham?p=0&sort=' + ${sort}}">Đầu tiên</a></li>
+
+						<!-- Link to the previous page -->
 						<li class="page-item" th:if="${page.number > 1}"><a
-							class="page-link" th:href="@{/DuocMyPham(p=${page.number - 1})}">&laquo;</a></li>
+							class="page-link"
+							th:href="@{'/DuocMyPham?p=' + ${page.number - 1} + '&sort=' + ${sort}}">&laquo;</a>
+						</li>
+
+						<!-- Ellipsis for skipped pages -->
 						<li class="page-item" th:if="${page.number > 2}"><span
 							class="page-link">...</span></li>
+
+						<!-- Page numbers -->
 						<li class="page-item"
-							th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}"><a
-							class="page-link" th:href="@{/DuocMyPham(p=${i})}"
-							th:text="${i + 1}"></a></li>
-						<li class="page-item" th:if="${page.number < page.totalPages - 3}"><span
-							class="page-link">...</span></li>
-						<li class="page-item" th:if="${page.number < page.totalPages - 1}"><a
-							class="page-link" th:href="@{/DuocMyPham(p=${page.number + 1})}">&raquo;</a></li>
+							th:each="i : ${#numbers.sequence(0, page.totalPages - 1)}">
+							<a class="page-link"
+							th:href="@{'/DuocMyPham?p=' + ${i} + '&sort=' + ${sort}}"
+							th:text="${i + 1}"></a>
+						</li>
+
+						<!-- Ellipsis for skipped pages -->
+						<li class="page-item" th:if="${page.number < page.totalPages - 3}">
+							<span class="page-link">...</span>
+						</li>
+
+						<!-- Link to the next page -->
+						<li class="page-item" th:if="${page.number < page.totalPages - 1}">
+							<a class="page-link"
+							th:href="@{'/DuocMyPham?p=' + ${page.number + 1} + '&sort=' + ${sort}}">&raquo;</a>
+						</li>
+
+						<!-- Link to the last page -->
 						<li class="page-item"><a class="page-link"
-							th:href="@{/DuocMyPham(p=${page.totalPages - 1})}">Cuối cùng</a></li>
+							th:href="@{'/DuocMyPham?p=' + ${page.totalPages - 1} + '&sort=' + ${sort}}">Cuối
+								cùng</a></li>
 					</ul>
 				</nav>
+
 			</div>
 		</div>
 	</div>
@@ -285,4 +317,9 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 	crossorigin="anonymous"></script>
+<script>
+	function SortChange() {
+		document.getElementById("submitSort").submit();
+	}
+</script>
 </html>

@@ -33,6 +33,9 @@ dependencies {
 	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	//implementation("org.springframework.boot:spring-boot-starter-web")
+    // Thêm dependency cho validation
+    implementation("org.springframework.boot:spring-boot-starter-validation")
 
 	// https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core
 	implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.5.2.Final'

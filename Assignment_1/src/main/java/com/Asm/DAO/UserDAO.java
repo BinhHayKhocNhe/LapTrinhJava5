@@ -32,5 +32,9 @@ public interface UserDAO extends JpaRepository<Users, Long> {
 			+ "u.Phone = ?6, u.Gender = ?7, u.Birthday = ?8, u.Role = ?9 WHERE u.ID_User = ?1")
 	void updateUser(Long userId, String username, String password, String fullname, String email, String phone,
 			boolean gender, Date birthday, String role);
+	
+	//Tìm người dùng theo email
+	@Query(value = "SELECT * FROM Users WHERE Email LIKE ?@example.com", nativeQuery = true)
+	Users findByEmail(String email);
 
 }

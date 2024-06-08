@@ -30,5 +30,5 @@ public class Products {
 	@Column(name = "CategoryID")
 	private String CategoryID;
 	private float Sale;
-	private String Note;
+	private String Note;	
 }

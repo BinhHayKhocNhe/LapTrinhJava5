@@ -88,6 +88,10 @@ public class Home_Controler {
 	public String contact() {
 		return "LienHe";
 	}
+	@GetMapping("/Checkout")
+	public String Checkout() {
+		return "Checkout";
+	}
 
 	@GetMapping("/TrangDiem")
 	public String TrangDiem(Model model, @RequestParam("p") Optional<Integer> p,

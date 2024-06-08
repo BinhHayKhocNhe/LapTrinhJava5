@@ -74,7 +74,6 @@ DELETE FROM Products WHERE ProductID = 29;
 ALTER TABLE Products DROP COLUMN product_title;
 ALTER TABLE Products CHANGE ProductTitle product_title NVARCHAR(255) NOT NULL;
 
-
 INSERT INTO Products (product_title, Price, ImageURL, Quantity, CategoryID, Sale, Note)
 VALUES
 (N'Dầu gội Daeng nhân sâm phục hồi', 980000, N'product_1.jpg', 300, N'MP', 0, null),

@@ -79,14 +79,18 @@ public class Home_Controler {
 		return "DuocMyPham";
 	}
 
-	@GetMapping("/Cart")
-	public String cart() {
-		return "Cart";
-	}
+//	@GetMapping("/Cart")
+//	public String cart() {
+//		return "Cart";
+//	}
 
 	@GetMapping("/LienHe")
 	public String contact() {
 		return "LienHe";
+	}
+	@GetMapping("/Checkout")
+	public String Checkout() {
+		return "Checkout";
 	}
 
 	@GetMapping("/TrangDiem")

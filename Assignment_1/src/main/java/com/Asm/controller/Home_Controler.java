@@ -79,10 +79,10 @@ public class Home_Controler {
 		return "DuocMyPham";
 	}
 
-	@GetMapping("/Cart")
-	public String cart() {
-		return "Cart";
-	}
+//	@GetMapping("/Cart")
+//	public String cart() {
+//		return "Cart";
+//	}
 
 	@GetMapping("/LienHe")
 	public String contact() {

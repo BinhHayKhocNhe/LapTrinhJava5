@@ -19,29 +19,31 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.Asm.DAO.ProductDAO;
 import com.Asm.DAO.UserDAO;
 import com.Asm.Model.Products;
-
+import com.Asm.Utils.SessionService;
 
 @Controller
 public class Home_Controler {
 	@Autowired
 	private ProductDAO productDAO = null;
-	@Autowired
-	private UserDAO userDAO = null;
 
 	private Pageable pageable = null;
-
+	@Autowired
+	private SessionService sessionService = null;
 
 	@GetMapping("/")
-	public String index(Model model) {
+	private String index(Model model) {
 		List<Products> topProducts = productDAO.selectRandom(4);
 		List<Products> topSelling = productDAO.selectRandom(4);
 		model.addAttribute("topProducts", topProducts);
 		model.addAttribute("topSelling", topSelling);
+
+		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
+		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
 		return "index";
 	}
 
 	@GetMapping("/DuocMyPham")
-	public String duocMyPham(Model model, @RequestParam("p") Optional<Integer> p,
+	private String duocMyPham(Model model, @RequestParam("p") Optional<Integer> p,
 			@RequestParam("sort") Optional<String> sort) {
 		int currentPage = p.orElse(0);
 		String currentSort = sort.orElse("ProductID");
@@ -76,25 +78,27 @@ public class Home_Controler {
 		model.addAttribute("list", list);
 		model.addAttribute("sort", currentSort);
 
+		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
+		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
 		return "DuocMyPham";
 	}
 
-//	@GetMapping("/Cart")
-//	public String cart() {
-//		return "Cart";
-//	}
-
 	@GetMapping("/LienHe")
-	public String contact() {
+	private String contact(Model model) {
+		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
+		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
 		return "LienHe";
 	}
+
 	@GetMapping("/Checkout")
-	public String Checkout() {
+	private String Checkout(Model model) {
+		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
+		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
 		return "Checkout";
 	}
 
 	@GetMapping("/TrangDiem")
-	public String TrangDiem(Model model, @RequestParam("p") Optional<Integer> p,
+	private String TrangDiem(Model model, @RequestParam("p") Optional<Integer> p,
 			@RequestParam("sort") Optional<String> sort) {
 		int currentPage = p.orElse(0);
 		String currentSort = sort.orElse("ProductID");
@@ -127,21 +131,21 @@ public class Home_Controler {
 		List<Products> list = productDAO.selectRandom(5);
 		model.addAttribute("list", list);
 		model.addAttribute("sort", currentSort);
+
+		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
+		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
 		return "TrangDiem";
 	}
 
-	@GetMapping("/SignIn")
-	public String SignIn() {
-		return "SignIn";
-	}
-
-
 	@GetMapping(value = "/ProductDetail/{ProductID}")
-	public String ProductDetail(Model model, @PathVariable("ProductID") Long id) {
+	private String ProductDetail(Model model, @PathVariable("ProductID") Long id) {
 		Products productDetail = productDAO.findByID(id);
 		List<Products> topProducts = productDAO.selectRandom(4);
 		model.addAttribute("productDetail", productDetail);
 		model.addAttribute("topProducts", topProducts);
+
+		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
+		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
 		return "ProductDetail";
 	}
 

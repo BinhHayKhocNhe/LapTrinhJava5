@@ -12,57 +12,67 @@ import org.springframework.web.bind.annotation.*;
 public class Cart_Controller {
 
 	@Autowired
-	private CartService cartService;
-	 
+	private CartService cartService = null;
+
 	@Autowired
-	private ProductDAO productDAO;
-	 
+	private ProductDAO productDAO = null;
+
+	@Autowired
+	private SessionService sessionService = null;
 
 	@GetMapping("/Cart")
-	public String views() {
+	private String views(Model model) {
+		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
+		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
 		return "Cart";
 	}
 
 	@GetMapping("/cart")
-	public String viewCart(Model model) {
+	private String viewCart(Model model) {
 		model.addAttribute("cartItems", cartService.getItems());
 		model.addAttribute("totalAmount", cartService.getTotalAmount());
+
+		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
+		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
 		return "Cart";
 	}
-	
+
 	@GetMapping("/cart-checkout")
-	public String cartCheckout(Model model) {
+	private String cartCheckout(Model model) {
 		model.addAttribute("cartItems", cartService.getItems());
 		model.addAttribute("totalAmount", cartService.getTotalAmount());
+
+		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
+		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
 		return "Checkout";
 	}
-	
-	
 
 	@PostMapping("/add-cart/{productId}")
-    public String addToCart(@PathVariable("productId") Long productId, @RequestParam("quantity") int quantity, Model model) {
-        
-        Products product = productDAO.findByID(productId);
-        if (product != null) {
-            cartService.addToCart(product, quantity);
-        }
-        return "redirect:/cart";
-    }
+	private String addToCart(@PathVariable("productId") Long productId, @RequestParam("quantity") int quantity,
+			Model model) {
+
+		Products product = productDAO.findByID(productId);
+		if (product != null) {
+			cartService.addToCart(product, quantity);
+		}
+		return "redirect:/cart";
+	}
 
 	@PostMapping("/cart/update")
-	public String updateQuantity(@RequestParam("productId") Long productId, @RequestParam("quantity") int quantity, Model model) {
+	private String updateQuantity(@RequestParam("productId") Long productId, @RequestParam("quantity") int quantity,
+			Model model) {
 		cartService.updateQuantity(productId, quantity);
 		return "redirect:/cart";
 	}
 
 	@PostMapping("/cart/remove")
-	public String removeFromCart(@RequestParam("productId") Long productId) {
+	private String removeFromCart(@RequestParam("productId") Long productId, Model model) {
 		cartService.removeItem(productId);
 		return "redirect:/cart";
 	}
 
 	@PostMapping("/cart/clear")
-	public String clearCart() {
+	private String clearCart(Model model) {
 		cartService.clearCart();
 		return "redirect:/cart";
 	}

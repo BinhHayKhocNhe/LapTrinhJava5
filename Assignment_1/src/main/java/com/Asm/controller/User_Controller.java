@@ -36,6 +36,8 @@ public class User_Controller {
 
 		model.addAttribute("pageUser", page);
 		model.addAttribute("keywordsUser", session.getSession("keywordsUser", ""));
+		model.addAttribute("sessionUser", session.getSession("sessionUser", null));
+		model.addAttribute("roleUser", session.getSession("roleUser", null));
 	}
 
 	@RequestMapping(value = "/User", method = { RequestMethod.GET, RequestMethod.POST })

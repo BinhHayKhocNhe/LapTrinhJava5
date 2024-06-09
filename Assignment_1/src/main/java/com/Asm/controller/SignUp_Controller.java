@@ -1,7 +1,5 @@
 package com.Asm.controller;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,26 +18,28 @@ public class SignUp_Controller {
 
 	@GetMapping("/SignUp")
 	private String view(Model model) {
-		
+
 		Users user = new Users();
 		model.addAttribute("user", user);
-		
+
 		return "SignUp";
 	}
+
 	@PostMapping("/SignUp")
-	public String processSignUp(Model model,@ModelAttribute("user") Users user,@RequestParam("repassword") String repassword){
-		
-	// Username existence check
-	Users existingUser = dao.findByUsername(user.getUsername());
-	if (existingUser != null) {
-		model.addAttribute("error", "Tài khoản đã có người sử dụng!!!");
-		return "SignUp";
+	private String processSignUp(Model model, @ModelAttribute("user") Users user,
+			@RequestParam("repassword") String repassword) {
+
+		// Username existence check
+		Users existingUser = dao.findByUsername(user.getUsername());
+		if (existingUser != null) {
+			model.addAttribute("error", "Tài khoản đã có người sử dụng!!!");
+			return "SignUp";
 		}
 		// Basic field validations
 		if (isEmpty(user.getFullname())) {
 			model.addAttribute("error", "Họ tên đầy đủ của người dùng không được để trống");
 			return "SignUp";
-		}else if (isEmpty(user.getUsername())) {
+		} else if (isEmpty(user.getUsername())) {
 			model.addAttribute("error", "Tên người dùng không được để trống");
 			return "SignUp";
 		} else if (isEmpty(user.getEmail())) {
@@ -58,12 +58,12 @@ public class SignUp_Controller {
 			model.addAttribute("error", "Số điện thoại không được để trống");
 			return "SignUp";
 		}
-		
+
 		if (!isValidFullName(user.getFullname())) {
 			model.addAttribute("error", "Tên của bạn phải là chữ và không được có kí tự đặc biệt!!");
 			return "SignUp";
 		}
-		
+
 		if (!isValidPhoneNumber(user.getPhone())) {
 			model.addAttribute("error", "Số điện thoại nhập chưa đúng");
 			return "SignUp";
@@ -74,7 +74,7 @@ public class SignUp_Controller {
 			return "SignUp";
 		}
 //		// Email format validation
-	if (!isValidEmail(user.getEmail())) {
+		if (!isValidEmail(user.getEmail())) {
 			model.addAttribute("error", "Email bị sai định dạng");
 			return "SignUp";
 		}
@@ -95,13 +95,13 @@ public class SignUp_Controller {
 //		
 //
 		// 3. Save the new user to the database (avoid unnecessary saveAndFlush())
-		//dao.save(user1);
+		// dao.save(user1);
 
 		// 4. Handle successful signup (e.g., redirect to login page, send confirmation
-		
+
 		return "redirect:/SignIn"; // Replace with appropriate redirect URL
-		}
-	
+	}
+
 	private boolean isEmpty(String value) {
 		return value == null || value.trim().isEmpty();
 	}
@@ -111,6 +111,7 @@ public class SignUp_Controller {
 		return email.matches(regexPattern);
 
 	}
+
 	private boolean isValidPhoneNumber(String phone) {
 		// Logic validate số điện thoại theo yêu cầu của bạn
 		if (phone.startsWith("0") && phone.length() >= 10 && phone.length() <= 11) {
@@ -118,16 +119,17 @@ public class SignUp_Controller {
 		}
 		return false;
 	}
+
 	private boolean isValidFullName(String fullName) {
-	    // Regular expression for validating full names (no numbers or special characters)
-	    String regex = "[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝÇçÑñ\\s]+";
+		// Regular expression for validating full names (no numbers or special
+		// characters)
+		String regex = "[A-Za-zÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚÝÇçÑñ\\s]+";
 
-	    if (fullName.matches(regex)) {
-	        return true;
-	    } else {
-	        return false;
-	    }
+		if (fullName.matches(regex)) {
+			return true;
+		} else {
+			return false;
+		}
 	}
-
 
 }

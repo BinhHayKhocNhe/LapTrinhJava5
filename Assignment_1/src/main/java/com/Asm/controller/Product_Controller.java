@@ -1,4 +1,5 @@
 package com.Asm.controller;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,6 +44,9 @@ public class Product_Controller {
 
 		model.addAttribute("pageProduct", page);
 		model.addAttribute("keywordsProduct", session.getSession("keywordsProduct", ""));
+		
+		model.addAttribute("sessionUser", session.getSession("sessionUser", null));
+		model.addAttribute("roleUser", session.getSession("roleUser", null));
 	}
 
 	@RequestMapping(value = "/Product", method = { RequestMethod.GET, RequestMethod.POST })

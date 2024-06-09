@@ -29,6 +29,15 @@ public class Cart_Controller {
 		model.addAttribute("totalAmount", cartService.getTotalAmount());
 		return "Cart";
 	}
+	
+	@GetMapping("/cart-checkout")
+	public String cartCheckout(Model model) {
+		model.addAttribute("cartItems", cartService.getItems());
+		model.addAttribute("totalAmount", cartService.getTotalAmount());
+		return "Checkout";
+	}
+	
+	
 
 	@PostMapping("/add-cart/{productId}")
     public String addToCart(@PathVariable("productId") Long productId, @RequestParam("quantity") int quantity, Model model) {
@@ -41,13 +50,13 @@ public class Cart_Controller {
     }
 
 	@PostMapping("/cart/update")
-	public String updateQuantity(@RequestParam Long productId, @RequestParam int quantity) {
+	public String updateQuantity(@RequestParam("productId") Long productId, @RequestParam("quantity") int quantity, Model model) {
 		cartService.updateQuantity(productId, quantity);
 		return "redirect:/cart";
 	}
 
 	@PostMapping("/cart/remove")
-	public String removeFromCart(@RequestParam Long productId) {
+	public String removeFromCart(@RequestParam("productId") Long productId) {
 		cartService.removeItem(productId);
 		return "redirect:/cart";
 	}

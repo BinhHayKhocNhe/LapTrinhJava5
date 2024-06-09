@@ -83,7 +83,7 @@
                     <form th:action="@{/cart/clear}" method="post" class="d-inline">
                         <button class="btn btn-warning me-2" type="submit">Xóa tất cả</button>
                     </form>
-                    <a href="/Checkout" class="btn btn-warning me-2">Thanh toán tất cả</a>
+                    <a href="/cart-checkout" class="btn btn-warning me-2">Thanh toán tất cả</a>
                     <div class="">Tổng tiền: <span th:text="${#numbers.formatInteger(totalAmount, 3, 'POINT')} + ' VNĐ'"></span></div>
                 </div>
             </div>

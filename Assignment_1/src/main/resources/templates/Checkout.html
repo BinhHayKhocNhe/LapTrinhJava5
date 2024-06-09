@@ -213,21 +213,21 @@
 
 						</thead>
 						<tbody>
-							<tr>
+							<tr th:each="item: ${cartItems}">
 								<td style="position: relative;">
 									<div class="product-image-box">
 										<img
-											src="https://pos.nvncdn.com/ecf0d0-45233/ps/20190402_eRTesQWHosPUSkD1Qxe5tEqp.jpg"
+											th:src="@{'/img/' + ${item.product.imageURL}}"
 											alt="Product Image" class="product-image">
 
-									</div> <span class="product-quantity">1</span>
+									</div> <span class="product-quantity" th:text="${item.quantity}"></span>
 								</td>
-								<td>Dầu gội Daeng nhân sâm phục hồi</td>
-								<td>980,000 ₫</td>
+								<td th:text="${item.product.productTitle}"></td>
+								<td th:text="${#numbers.formatInteger(item.product.price * (100 - item.product.sale) / 100, 3, 'POINT')} + ' VNĐ'"></td>
 							</tr>
 
 
-							<tr>
+							<!-- <tr>
 								<td style="position: relative; margin-top: 10px;">
 									<div class="product-image-box">
 										<img
@@ -237,7 +237,7 @@
 								</td>
 								<td>Serum dưỡng da chống lão hóa</td>
 								<td>870,000 ₫</td>
-							</tr>
+							</tr> -->
 						</tbody>
 					</table>
 
@@ -250,7 +250,7 @@
 							id="button-addon2">Áp dụng</button>
 
 					</div>
-					<a class="previous-link" href="/Cart"> <i
+					<a class="previous-link" href="/cart"> <i
 						class="fa fa-angle-left fa-lg"  aria-hidden="true"></i> <span style="color: #3982e0;">< Quay
 							về giỏ hàng</span>
 					</a>
@@ -258,7 +258,7 @@
 					<div class="d-flex flex-column align-items-end">
 
 						<p class="mb-0">Phí vận chuyển: 0 ₫</p>
-						<p class="mb-0">Tổng cộng: 1,850,000 ₫</p>
+						<p class="mb-0">Tổng cộng: <span th:text="${#numbers.formatInteger(totalAmount, 3, 'POINT')} + ' VNĐ'"></span></p>
 						<button type="submit" class="btn btn-primary mt-2">Đặt
 							hàng</button>
 

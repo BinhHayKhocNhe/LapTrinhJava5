@@ -38,12 +38,12 @@ public class Product_Controller {
 
 	@Autowired
 	private CartService cartService = null;
-	
+
 	private void totalProducts(Model model) {
 		int totalProducts = cartService.getTotalProducts();
 		model.addAttribute("sumProduct", totalProducts);
 	}
-	
+
 	private void loadProductData(Model model, Optional<String> key, Optional<Integer> p) {
 		String keywords = key.orElse(session.getSession("keywordsProduct", ""));
 		session.setSession("keywordsProduct", keywords);
@@ -53,10 +53,10 @@ public class Product_Controller {
 
 		model.addAttribute("pageProduct", page);
 		model.addAttribute("keywordsProduct", session.getSession("keywordsProduct", ""));
-		
+
 		model.addAttribute("sessionUser", session.getSession("sessionUser", null));
 		model.addAttribute("roleUser", session.getSession("roleUser", null));
-		
+
 		totalProducts(model);
 	}
 
@@ -99,8 +99,8 @@ public class Product_Controller {
 			String fileName = StringUtils.cleanPath(attach.getOriginalFilename());
 			product.setImageURL(fileName);
 
-			// Lưu đối tượng Products vào cơ sở dữ liệu
-			dao.save(product);
+			dao.insertProduct(product.getProductTitle(), product.getPrice(), product.getImageURL(), product.getQuantity(),
+					product.getCategories().getCategoryID(), product.getSale(), product.getNote());
 			loadProductData(model, key, p);
 			return doUpload(model, product, attach);
 		} catch (Exception e) {

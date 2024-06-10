@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.Asm.DAO.UserDAO;
 import com.Asm.Model.Users;
+import com.Asm.Utils.CartService;
 import com.Asm.Utils.SessionService;
 
 @Controller
@@ -26,6 +27,14 @@ public class User_Controller {
 
 	@Autowired
 	private SessionService session = null;
+
+	@Autowired
+	private CartService cartService = null;
+
+	private void totalProducts(Model model) {
+		int totalProducts = cartService.getTotalProducts();
+		model.addAttribute("sumProduct", totalProducts);
+	}
 
 	private void loadUserData(Model model, Optional<String> key, Optional<Integer> p) {
 		String keywords = key.orElse(session.getSession("keywordsUser", ""));
@@ -38,6 +47,8 @@ public class User_Controller {
 		model.addAttribute("keywordsUser", session.getSession("keywordsUser", ""));
 		model.addAttribute("sessionUser", session.getSession("sessionUser", null));
 		model.addAttribute("roleUser", session.getSession("roleUser", null));
+		
+		totalProducts(model);
 	}
 
 	@RequestMapping(value = "/User", method = { RequestMethod.GET, RequestMethod.POST })

@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.Asm.DAO.ProductDAO;
 import com.Asm.Model.Products;
+import com.Asm.Utils.CartService;
 import com.Asm.Utils.SessionService;
 
 @Controller
@@ -35,6 +36,14 @@ public class Product_Controller {
 	@Autowired
 	private SessionService session = null;
 
+	@Autowired
+	private CartService cartService = null;
+	
+	private void totalProducts(Model model) {
+		int totalProducts = cartService.getTotalProducts();
+		model.addAttribute("sumProduct", totalProducts);
+	}
+	
 	private void loadProductData(Model model, Optional<String> key, Optional<Integer> p) {
 		String keywords = key.orElse(session.getSession("keywordsProduct", ""));
 		session.setSession("keywordsProduct", keywords);
@@ -47,6 +56,8 @@ public class Product_Controller {
 		
 		model.addAttribute("sessionUser", session.getSession("sessionUser", null));
 		model.addAttribute("roleUser", session.getSession("roleUser", null));
+		
+		totalProducts(model);
 	}
 
 	@RequestMapping(value = "/Product", method = { RequestMethod.GET, RequestMethod.POST })

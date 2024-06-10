@@ -24,6 +24,8 @@ public class Cart_Controller {
 	private String views(Model model) {
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+		
+		totalProducts(model);
 		return "Cart";
 	}
 
@@ -34,6 +36,8 @@ public class Cart_Controller {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+		
+		totalProducts(model);
 		return "Cart";
 	}
 
@@ -44,17 +48,20 @@ public class Cart_Controller {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+		
+		totalProducts(model);
 		return "Checkout";
 	}
 
-	@PostMapping("/add-cart/{productId}")
-	private String addToCart(@PathVariable("productId") Long productId, @RequestParam("quantity") int quantity,
-			Model model) {
-
+	@RequestMapping(value = "/add-cart/{productId}", method = { RequestMethod.GET, RequestMethod.POST })
+	private String addToCart(@PathVariable("productId") Long productId,
+			@RequestParam(name = "quantity", required = false, defaultValue = "1") int quantity, Model model) {
 		Products product = productDAO.findByID(productId);
 		if (product != null) {
 			cartService.addToCart(product, quantity);
+			totalProducts(model);
 		}
+
 		return "redirect:/cart";
 	}
 
@@ -75,5 +82,10 @@ public class Cart_Controller {
 	private String clearCart(Model model) {
 		cartService.clearCart();
 		return "redirect:/cart";
+	}
+	
+	private void totalProducts(Model model) {
+		int totalProducts = cartService.getTotalProducts();
+		model.addAttribute("sumProduct", totalProducts);
 	}
 }

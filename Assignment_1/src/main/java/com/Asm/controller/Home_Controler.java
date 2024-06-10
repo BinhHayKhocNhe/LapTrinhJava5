@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.Asm.DAO.ProductDAO;
 import com.Asm.DAO.UserDAO;
 import com.Asm.Model.Products;
+import com.Asm.Utils.CartService;
 import com.Asm.Utils.SessionService;
 
 @Controller
@@ -30,6 +31,9 @@ public class Home_Controler {
 	@Autowired
 	private SessionService sessionService = null;
 
+	@Autowired
+	private CartService cartService = null;
+
 	@GetMapping("/")
 	private String index(Model model) {
 		List<Products> topProducts = productDAO.selectRandom(4);
@@ -39,6 +43,8 @@ public class Home_Controler {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+		
+		totalProducts(model);
 		return "index";
 	}
 
@@ -80,6 +86,8 @@ public class Home_Controler {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+		
+		totalProducts(model);
 		return "DuocMyPham";
 	}
 
@@ -87,6 +95,8 @@ public class Home_Controler {
 	private String contact(Model model) {
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+		
+		totalProducts(model);
 		return "LienHe";
 	}
 
@@ -94,6 +104,8 @@ public class Home_Controler {
 	private String Checkout(Model model) {
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+		
+		totalProducts(model);
 		return "Checkout";
 	}
 
@@ -134,6 +146,8 @@ public class Home_Controler {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+		
+		totalProducts(model);
 		return "TrangDiem";
 	}
 
@@ -146,7 +160,14 @@ public class Home_Controler {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+		
+		totalProducts(model);
 		return "ProductDetail";
+	}
+
+	private void totalProducts(Model model) {
+		int totalProducts = cartService.getTotalProducts();
+		model.addAttribute("sumProduct", totalProducts);
 	}
 
 }

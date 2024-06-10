@@ -42,6 +42,12 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:3.3.0'
 	
+	// https://mvnrepository.com/artifact/org.apache.poi/poi
+	implementation group: 'org.apache.poi', name: 'poi', version: '5.2.5'
+	// https://mvnrepository.com/artifact/com.google.zxing/core
+	implementation group: 'com.google.zxing', name: 'core', version: '3.5.3'
+
+	
 }
 
 tasks.named('test') {

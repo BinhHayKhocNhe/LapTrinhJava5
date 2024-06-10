@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="UTF-8">
+<meta charset="UTF-8">
 </head>
 
 <body>
@@ -31,16 +31,17 @@
 						<div class="col-lg-4 col-md-6 col-sm-6 header-items">
 							<div class="hotline">
 								<a href="#"> <img class="img-hotline"
-										src="https://web.nvnstatic.net/tp/T0269/img/tmp/mobile-phone.svg?v=3" alt="">
-									<span class="fw-normal">0385293535</span>
+									src="https://web.nvnstatic.net/tp/T0269/img/tmp/mobile-phone.svg?v=3"
+									alt=""> <span class="fw-normal">0385293535</span>
 								</a>
 							</div>
 						</div>
-						<div class="col-lg-4 d-none d-md-block d-lg-block header-items-logo">
+						<div
+							class="col-lg-4 d-none d-md-block d-lg-block header-items-logo">
 							<div class="logo text-center">
 								<a href="#"> <img
-										src="https://pos.nvncdn.com/ecf0d0-45233/store/20190401_2T7UzVsuzJQeCNaVLIFuGf1o.jpg"
-										alt="">
+									src="https://pos.nvncdn.com/ecf0d0-45233/store/20190401_2T7UzVsuzJQeCNaVLIFuGf1o.jpg"
+									alt="">
 								</a>
 							</div>
 						</div>
@@ -48,15 +49,17 @@
 							<div
 								class="d-flex justify-content-end justify-content-md-end justify-content-lg-center align-items-center">
 								<div class="cart me-3">
-									<a href="/Cart" class="position-relative"> <i class="bi bi-cart"></i> <span
-											class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
-											1</span>
+									<a href="/cart" class="position-relative"> <i
+										class="bi bi-cart"></i> <span th:text="${sumProduct}"
+										class="position-absolute top-1 start-100 translate-middle badge rounded-pill bg-danger">
+									</span>
 									</a>
 								</div>
 								<div class="search me-3">
 									<div class="nav-item">
-										<a class="nav-link" href="#" role="button" data-bs-toggle="dropdown"
-											aria-expanded="false"> <i class="bi bi-search"></i>
+										<a class="nav-link" href="#" role="button"
+											data-bs-toggle="dropdown" aria-expanded="false"> <i
+											class="bi bi-search"></i>
 										</a>
 										<ul class="dropdown-menu" style="border: none;">
 											<div class="input-group mb-3">
@@ -72,12 +75,17 @@
 								</div>
 								<div class="user">
 									<div class="nav-item dropdown">
-										<a class="nav-link" href="" role="button" data-bs-toggle="dropdown"
-											aria-expanded="false"> <i class="bi bi-person-circle"></i>
+										<a class="nav-link" href="" role="button"
+											data-bs-toggle="dropdown" aria-expanded="false"> <i
+											class="bi bi-person-circle"></i>
 										</a>
 										<ul class="dropdown-menu">
-											<li><a class="dropdown-item" href="SignIn">Đăng nhập</a></li>
-											<li><a class="dropdown-item" href="SignUp">Đăng kí</a></li>
+											<li th:if="${sessionUser == null}"><a
+												class="dropdown-item" href="/SignIn">Đăng nhập</a></li>
+											<li th:if="${sessionUser == null}"><a
+												class="dropdown-item" href="/SignUp">Đăng ký</a></li>
+											<li th:if="${sessionUser != null}"><a
+												class="dropdown-item" href="/logout">Đăng xuất</a></li>
 										</ul>
 									</div>
 								</div>
@@ -91,30 +99,32 @@
 				<div class="container d-flex justify-content-lg-center p-0">
 					<nav class="navbar navbar-expand-lg">
 						<div class="container-fluid">
-							<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-								data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-								aria-expanded="false" aria-label="Toggle navigation">
+							<button class="navbar-toggler" type="button"
+								data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+								aria-controls="navbarNavDropdown" aria-expanded="false"
+								aria-label="Toggle navigation">
 								<span class="navbar-toggler-icon"></span>
 							</button>
 							<div class="collapse navbar-collapse" id="navbarNavDropdown">
 								<ul class="navbar-nav text-uppercase">
-									<li class="nav-item"><a class="nav-link" aria-current="page" href="/">Trang chủ</a>
-									</li>
-									<li class="nav-item"><a class="nav-link" href="/DuocMyPham">Dược mỹ phẩm</a></li>
+									<li class="nav-item"><a class="nav-link"
+										aria-current="page" href="/">Trang chủ</a></li>
+									<li class="nav-item"><a class="nav-link"
+										href="/DuocMyPham">Dược mỹ phẩm</a></li>
 									<li class="nav-item"><a class="nav-link" href="/TrangDiem">Trang
 											điểm</a></li>
 									<li class="nav-item"><a class="nav-link" href="#about">Giới
 											thiệu</a></li>
 									<li class="nav-item"><a class="nav-link" href="/LienHe">Liên
 											hệ</a></li>
-									<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-											role="button" data-bs-toggle="dropdown" aria-expanded="false"> Quản lí </a>
+									<li class="nav-item dropdown" th:if="${roleUser == 'Admin'}"><a
+										class="nav-link dropdown-toggle" href="#" role="button"
+										data-bs-toggle="dropdown" aria-expanded="false"> Quản lí </a>
 										<ul class="dropdown-menu">
 											<li><a class="dropdown-item" href="/User">Người dùng</a></li>
 											<li><a class="dropdown-item" href="/Product">Sản
 													phẩm</a></li>
-										</ul>
-									</li>
+										</ul></li>
 								</ul>
 							</div>
 						</div>

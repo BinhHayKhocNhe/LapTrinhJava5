@@ -62,10 +62,10 @@
                                 <form th:action="@{/cart/update}" method="post" class="d-inline">
                                     <input type="hidden" name="productId" th:value="${item.product.productID}" />
                                     <div class="input-group justify-content-center" style="max-width: 150px;">
-                                        <button class="btn btn-outline-secondary" type="button" data-qty-minus>-</button>
+                                        <button class="btn btn-outline-secondary" type="submit" data-qty-minus>-</button>
                                         <input type="number" name="quantity" th:value="${item.quantity}" min="1" class="form-control text-center" style="max-width: 50px;">
-                                        <button class="btn btn-outline-secondary" type="button" data-qty-plus>+</button>
-                                        <button class="btn btn-outline-secondary" type="submit">Cập nhật</button>
+                                        <button class="btn btn-outline-secondary" type="submit" data-qty-plus>+</button>
+                                       
                                     </div>
                                 </form>
                             </td>

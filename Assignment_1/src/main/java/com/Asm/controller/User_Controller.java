@@ -47,7 +47,7 @@ public class User_Controller {
 		model.addAttribute("keywordsUser", session.getSession("keywordsUser", ""));
 		model.addAttribute("sessionUser", session.getSession("sessionUser", null));
 		model.addAttribute("roleUser", session.getSession("roleUser", null));
-		
+
 		totalProducts(model);
 	}
 

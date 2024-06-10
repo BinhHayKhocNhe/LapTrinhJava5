@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import com.Asm.DAO.UserDAO;
 import com.Asm.Model.Users;
 import com.Asm.Utils.CookieService;
@@ -35,7 +34,7 @@ public class SignIn_Controller {
 	@PostMapping("/SignIn")
 	private String processSignUp(Model model, @RequestParam("username") String username,
 			@RequestParam("password") String password,
-			@RequestParam(value = "remember", required = false) Boolean remember) {
+			@RequestParam(value = "remember", required = false) boolean remember) {
 
 		// Xóa khoảng trắng ở đầu và cuối chuỗi
 		username = username.trim();
@@ -62,7 +61,7 @@ public class SignIn_Controller {
 			return "SignIn";
 		}
 
-		if (Boolean.TRUE.equals(remember)) {
+		if (remember == true) {
 			cookieService.setCookie("username", username, 24);
 			cookieService.setCookie("password", password, 24);
 

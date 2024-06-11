@@ -12,6 +12,7 @@ CREATE TABLE Users (
     Birthday DATE NOT NULL,
     Role NVARCHAR(20) NOT NULL
 );
+
 ALTER TABLE Users
 ADD CONSTRAINT unique_username UNIQUE (Username);
 DELETE FROM Users WHERE ID_User = 46;
@@ -25,7 +26,7 @@ VALUES
     ('user5', 'password5', N'Lê Thị Mai', 'user5@example.com', '222222222', 0, '1998-03-20', 'User'),
     ('user6', 'password6', N'Phạm Thị Hương', 'user6@example.com', '333333333', 0, '1985-11-05', 'Admin'),
     ('user7', 'password7', N'Bùi Thị An', 'user7@example.com', '444444444', 0, '1990-06-25', 'User'),
-    ('user8', 'password8', N'Vũ Thị Trang', 'user8@example.com', '555555555', 0, '1996-12-10', 'User');
+    ('user33', 'password33', N'Dương Minh Bình', 'clonechuaxu@gmail.com', '555555555', 0, '1996-12-10', 'User');
 INSERT INTO Users (Username, Password, Fullname, Email, Phone, Gender, Birthday, Role) 
 VALUES 
 ('user7', 'password7', 'User Seven', 'user7@example.com', '123456785', 1, '1975-02-05', 'User'),
@@ -106,9 +107,10 @@ VALUES
 CREATE TABLE Invoices (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     ID_User INT NOT NULL,
-    TotalAmount DECIMAL(10, 2) NOT NULL,
-    PhoneNumber NVARCHAR(20) NOT NULL,
+    Fullname NVARCHAR(255) NOT NULL,
+    phone NVARCHAR(20) NOT NULL,
     Address NVARCHAR(255) NOT NULL,
+    create_Date DATETIME NOT NULL,
     CONSTRAINT FK_UserID FOREIGN KEY (ID_User) REFERENCES Users(ID_User)
 );
 CREATE TABLE InvoiceDetails (
@@ -122,10 +124,11 @@ CREATE TABLE InvoiceDetails (
 );
 
 -- Chèn mẫu dữ liệu vào bảng Invoices
-INSERT INTO Invoices (ID_User, TotalAmount, PhoneNumber, Address)
-VALUES 
-    (1, 150000, '123456789', '123 Main Street'),
-    (2, 250000, '987654321', '456 Elm Street');
+INSERT INTO Invoices (ID_User, Fullname, PhoneNumber, Address, CreateDate)
+VALUES
+    (1, 'Nguyễn Văn A', '0987654321', '123 Đường ABC, Quận XYZ, Thành phố HCM', '2024-06-11 10:00:00'),
+    (2, 'Trần Thị B', '0123456789', '456 Đường XYZ, Quận ABC, Thành phố HN', '2024-06-11 11:00:00'),
+    (3, 'Lê Văn C', '0369852147', '789 Đường XYZ, Quận XYZ, Thành phố HCM', '2024-06-11 12:00:00');
 -- Chèn mẫu dữ liệu vào bảng InvoiceDetails
 INSERT INTO InvoiceDetails (InvoiceID, ProductID, Quantity, Price)
 VALUES 

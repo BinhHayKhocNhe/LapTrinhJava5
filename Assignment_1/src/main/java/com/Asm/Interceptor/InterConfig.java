@@ -12,8 +12,7 @@ public class InterConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(auth)
-				.addPathPatterns("/User", "/editUser", "/deleteUser", "/Product", "/editProduct", "/deleteProduct")
-				.excludePathPatterns("/SignIn");
+		registry.addInterceptor(auth).addPathPatterns("/User", "/editUser", "/deleteUser", "/Product", "/editProduct",
+				"/deleteProduct", "/Export").excludePathPatterns("/SignIn");
 	}
 }

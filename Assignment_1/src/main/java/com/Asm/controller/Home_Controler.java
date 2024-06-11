@@ -43,7 +43,7 @@ public class Home_Controler {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
-		
+
 		totalProducts(model);
 		return "index";
 	}
@@ -133,7 +133,7 @@ public class Home_Controler {
 			sortOrder = Sort.by(Sort.Direction.DESC, "ProductTitle");
 			break;
 		default:
-			sortOrder = Sort.by(Sort.Direction.ASC, "ProductID");
+			sortOrder = Sort.by(Sort.Direction.DESC, "ProductID");
 			break;
 		}
 

@@ -54,7 +54,7 @@ public class SignIn_Controller {
 		}
 
 		Users user = optionalUser.get();
-
+		
 		if (!user.getPassword().equals(password)) {
 			model.addAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng");
 			System.out.println("Mật khẩu không đúng");
@@ -67,12 +67,16 @@ public class SignIn_Controller {
 
 			sessionService.setSession("sessionUser", username);
 			sessionService.setSession("roleUser", user.getRole());
+			
+			sessionService.setSession("IDUser", user.getID_User());
 		} else {
 			cookieService.removeCookie("username");
 			cookieService.removeCookie("password");
 
 			sessionService.setSession("sessionUser", username);
 			sessionService.setSession("roleUser", user.getRole());
+			
+			sessionService.setSession("IDUser", user.getID_User());
 		}
 		System.out.println("Đăng nhập thành công");
 		return "redirect:/";
@@ -82,6 +86,7 @@ public class SignIn_Controller {
 	private String logout(Model model) {
 		sessionService.removeSession("sessionUser");
 		sessionService.removeSession("roleUser");
+		sessionService.removeSession("IDUser");
 		return "redirect:/SignIn";
 	}
 }

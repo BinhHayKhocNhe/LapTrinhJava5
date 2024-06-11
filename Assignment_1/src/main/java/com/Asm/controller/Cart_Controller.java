@@ -1,8 +1,18 @@
 package com.Asm.controller;
 
+import com.Asm.DAO.InvoiceDetailDAO;
+import com.Asm.DAO.InvoicesDAO;
 import com.Asm.DAO.ProductDAO;
+import com.Asm.DAO.UserDAO;
+import com.Asm.Model.InvoiceDetails;
+import com.Asm.Model.Invoices;
 import com.Asm.Model.Products;
+import com.Asm.Model.Users;
 import com.Asm.Utils.*;
+
+import java.util.Optional;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +30,20 @@ public class Cart_Controller {
 	@Autowired
 	private SessionService sessionService = null;
 
+	@Autowired
+	private UserDAO userDAO = null;
+
+	@Autowired
+	private InvoicesDAO invoiceDAO = null;
+
+	@Autowired
+	private InvoiceDetailDAO detailDAO = null;
+
 	@GetMapping("/Cart")
 	private String views(Model model) {
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
-		
+
 		totalProducts(model);
 		return "Cart";
 	}
@@ -36,19 +55,26 @@ public class Cart_Controller {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
-		
+
 		totalProducts(model);
 		return "Cart";
 	}
 
 	@GetMapping("/cart-checkout")
 	private String cartCheckout(Model model) {
+		if (!model.containsAttribute("error")) {
+			model.addAttribute("error", null); // Nếu không có lỗi, đặt giá trị là null
+		} else if (!model.containsAttribute("message")) {
+			model.addAttribute("message", null); // Nếu không có lỗi, đặt giá trị là rỗng
+		}
+
 		model.addAttribute("cartItems", cartService.getItems());
 		model.addAttribute("totalAmount", cartService.getTotalAmount());
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
-		
+		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
+
 		totalProducts(model);
 		return "Checkout";
 	}
@@ -83,9 +109,45 @@ public class Cart_Controller {
 		cartService.clearCart();
 		return "redirect:/cart";
 	}
-	
+
 	private void totalProducts(Model model) {
 		int totalProducts = cartService.getTotalProducts();
 		model.addAttribute("sumProduct", totalProducts);
+	}
+
+	@PostMapping(value = "/submit-order")
+	public String submitOrder(@RequestParam(value = "productid", required = false) Long productId,
+			@RequestParam(value = "id", required = false) Long idUser, @RequestParam("name") String name,
+			@RequestParam("phone") String phone, @RequestParam("selectedDistrict") String address,
+			@RequestParam("quantity") int quantity, @RequestParam("price") double price, Model model) {
+		if (productId == null) {
+			model.addAttribute("error", "Vui lòng chọn sản phẩm!");
+			return "Checkout";
+		} else if (idUser == null) {
+			model.addAttribute("error", "Vui lòng đăng nhập để mua sản phẩm!");
+			return "Checkout";
+		}
+		Optional<Users> userOptional = userDAO.findById(idUser);
+		Optional<Products> productOptional = productDAO.findById(productId);
+		if (userOptional.isPresent()) {
+			Users user = userOptional.get();
+			// Tạo một đối tượng Invoices và thiết lập người dùng
+			Invoices invoice = new Invoices();
+			invoice.setUsers(user);
+			invoice.setFullname(name);
+			invoice.setPhone(phone);
+			invoice.setAddress(address);
+			Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now());
+			invoice.setCreate_Date(currentTimestamp);
+
+			invoiceDAO.save(invoice);
+
+			if (productOptional.isPresent()) {
+				Products product = productOptional.get();
+				detailDAO.insertDetail(invoice.getID(), product.getProductID(), quantity, price);
+			}
+			model.addAttribute("message", "Đặt đơn thành công!");
+		}
+		return "Checkout";
 	}
 }

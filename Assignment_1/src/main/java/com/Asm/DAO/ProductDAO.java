@@ -15,10 +15,10 @@ import com.Asm.Model.Products;
 import jakarta.transaction.Transactional;
 
 public interface ProductDAO extends JpaRepository<Products, Long> {
-	@Query("SELECT p FROM Products p WHERE p.categories.CategoryID = 'MP' ORDER BY ProductID DESC")
+	@Query("SELECT p FROM Products p WHERE p.categories.CategoryID = 'MP'")
 	Page<Products> findByCategoryIdCustom(Pageable pageable);
 
-	@Query("SELECT p FROM Products p WHERE p.categories.CategoryID = 'TD' ORDER BY ProductID DESC")
+	@Query("SELECT p FROM Products p WHERE p.categories.CategoryID = 'TD'")
 	Page<Products> findByCategoryIdCustomTD(Pageable pageable);
 
 	@Query(value = "SELECT * FROM Products WHERE product_title LIKE ?1 ORDER BY ProductID DESC", nativeQuery = true)

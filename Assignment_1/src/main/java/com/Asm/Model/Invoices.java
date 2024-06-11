@@ -3,7 +3,6 @@ package com.Asm.Model;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,30 +19,23 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Products")
-public class Products {
-
+@Table(name = "Invoices")
+public class Invoices {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long ID;
 
-	private Long ProductID;
+	private double TotalAmount;
 
-	private String ProductTitle;
+	private String PhoneNumber;
 
-	private double Price;
-
-	private String ImageURL;
-
-	private int Quantity;
-
-	private float Sale;
-
-	private String Note;
+	private String Address;
 
 	@ManyToOne
-	@JoinColumn(name = "CategoryID")
-	Categories categories;
+	@JoinColumn(name = "ID_User")
+	private Users user;
 
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "invoice")
 	private List<InvoiceDetails> invoiceDetails;
+
 }

@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -39,7 +37,7 @@ public class Users {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date Birthday;
 	private String Role;
-
-	@OneToMany(mappedBy = "user")
-	private List<Invoices> invoices;
+	
+	@OneToMany(mappedBy = "users")
+	List<Invoices> invoices;
 }

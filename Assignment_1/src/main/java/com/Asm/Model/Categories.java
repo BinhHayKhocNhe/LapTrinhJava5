@@ -2,7 +2,6 @@ package com.Asm.Model;
 
 import java.util.List;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
@@ -12,8 +11,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Categories")
 public class Categories {
@@ -21,7 +20,7 @@ public class Categories {
 	private String CategoryID;
 	private String Name;
 	private String Note;
-	@OneToMany(mappedBy="categories")
+
+	@OneToMany(mappedBy = "categories")
 	List<Products> products;
-	
 }

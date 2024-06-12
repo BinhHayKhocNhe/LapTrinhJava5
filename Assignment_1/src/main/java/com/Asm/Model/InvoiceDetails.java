@@ -7,6 +7,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,16 +18,22 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "InvoiceDetails")
 public class InvoiceDetails {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ID;
+	private int Quantity;
+	private double Price;
+
+	@Transient
+	private String productName;
+	@Transient
+    private double productPrice;
+	
 	@ManyToOne
 	@JoinColumn(name = "InvoiceID")
-	Invoices invoice;
+	private Invoices invoices;
+
 	@ManyToOne
 	@JoinColumn(name = "ProductID")
-	Products product;
-	private int Quantity;
-	private float Price;
+	private Products products;
 }

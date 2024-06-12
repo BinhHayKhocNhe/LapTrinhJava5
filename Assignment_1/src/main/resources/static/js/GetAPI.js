@@ -1,19 +1,15 @@
-/**
- * 
- */
-
 document.addEventListener("DOMContentLoaded", function() {
 	const token = '03a196a7-9195-11ee-8bfa-8a2dda8ec551'; // Thay thế bằng token thực tế
 	const provinceSelect = document.getElementById("province");
 	const districtSelect = document.getElementById("district");
 	const wardSelect = document.getElementById("ward");
 	const addressInput = document.getElementById("address");
-	const submitBtn = document.getElementById("submitBtn");
-	const selectedAddress = document.getElementById("selectedAddress");
+	const showSelectionButton = document.getElementById("showSelection");
+	const selectedDistrictText = document.getElementById("selectedDistrict");
 
 	function updateDistrictOptions(districts) {
-		districtSelect.innerHTML = '<option disabled selected>Chọn quận/huyện</option>';
-		wardSelect.innerHTML = '<option disabled selected>Chọn xã/phường</option>';
+		districtSelect.innerHTML = '<option value="" disabled selected>Chọn quận/huyện</option>';
+		wardSelect.innerHTML = '<option value="" disabled selected>Chọn xã/phường</option>';
 
 		districts.forEach(district => {
 			const option = document.createElement('option');
@@ -24,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
 	}
 
 	function updateWardOptions(wards) {
-		wardSelect.innerHTML = '<option disabled selected>Chọn xã/phường</option>';
+		wardSelect.innerHTML = '<option value="" disabled selected>Chọn xã/phường</option>';
 
 		wards.forEach(ward => {
 			const option = document.createElement('option');
@@ -75,16 +71,6 @@ document.addEventListener("DOMContentLoaded", function() {
 			.catch(error => console.error('Error:', error));
 	});
 
-	submitBtn.addEventListener("click", function() {
-		const provinceName = provinceSelect.options[provinceSelect.selectedIndex].text;
-		const districtName = districtSelect.options[districtSelect.selectedIndex].text;
-		const wardName = wardSelect.options[wardSelect.selectedIndex].text;
-		const address = addressInput.value;
-
-		const fullAddress = `${address}, ${wardName}, ${districtName}, ${provinceName}`;
-		selectedAddress.innerHTML = `<div class="alert alert-success">Địa chỉ đã chọn: ${fullAddress}</div>`;
-	});
-
 	// Lấy danh sách tỉnh/thành phố ban đầu
 	fetch("https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province", {
 		method: 'GET',
@@ -107,4 +93,21 @@ document.addEventListener("DOMContentLoaded", function() {
 			}
 		})
 		.catch(error => console.error("Lỗi khi lấy danh sách tỉnh/thành phố: ", error));
+
+	// Xử lý sự kiện khi nút được nhấn
+	showSelectionButton.addEventListener("click", function() {
+		const selectedProvinceOption = provinceSelect.options[provinceSelect.selectedIndex];
+		const selectedDistrictOption = districtSelect.options[districtSelect.selectedIndex];
+		const selectedWardOption = wardSelect.options[wardSelect.selectedIndex];
+		const address = addressInput.value.trim();
+
+		if (selectedProvinceOption && selectedDistrictOption && selectedWardOption &&
+			selectedProvinceOption.value && selectedDistrictOption.value && selectedWardOption.value && address) {
+			const selectedDistrict = `${address}, ${selectedWardOption.textContent}, ${selectedDistrictOption.textContent}, ${selectedProvinceOption.textContent}`;
+			selectedDistrictText.textContent = selectedDistrict;
+			document.getElementById("selectedDistrict").value = selectedDistrict; // Set value to input
+		} else {
+			selectedDistrictText.textContent = "Vui lòng chọn đầy đủ tỉnh/thành phố, quận/huyện, xã/phường và nhập địa chỉ cụ thể.";
+		}
+	});
 });

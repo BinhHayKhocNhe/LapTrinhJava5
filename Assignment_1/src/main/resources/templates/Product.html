@@ -42,7 +42,7 @@
 			<div class="col-lg-3 col-md-12 col-sm-12 border p-3 rounded-3 mt-3">
 				<form th:action="@{/formUser}" method="post" th:object="${product}"
 					enctype="multipart/form-data">
-					<div class="mb-2">
+					<div class="mb-2" hidden>
 						<label for="exampleInputEmail1" class="form-label">ID:</label> <input
 							type="text" class="form-control" th:field="*{ProductID}"
 							readonly="readonly">
@@ -163,7 +163,7 @@
 							<td th:text="${product.ProductTitle}"></td>
 							<td
 								th:text="${#numbers.formatInteger(product.Price,3,'POINT')}+ 'đ'"></td>
-							<td th:text="${product.categories.name}"></td>
+							<td th:text="${product.categories.CategoryID}"></td>
 							<td><a class="text-primary text-decoration-underline me-3"
 								th:href="@{'/editProduct/' + ${product.ProductID}}"> Xem
 									thông tin </a> <a

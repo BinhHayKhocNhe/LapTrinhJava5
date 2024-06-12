@@ -11,6 +11,7 @@ import com.Asm.Model.Users;
 import com.Asm.Utils.CookieService;
 import com.Asm.Utils.SessionService;
 
+
 import java.util.Optional;
 
 @Controller
@@ -61,19 +62,19 @@ public class SignIn_Controller {
 			return "SignIn";
 		}
 
-		if (remember == true) {
+		if (remember) {
 			cookieService.setCookie("username", username, 24);
 			cookieService.setCookie("password", password, 24);
-
-			sessionService.setSession("sessionUser", username);
-			sessionService.setSession("roleUser", user.getRole());
 		} else {
 			cookieService.removeCookie("username");
 			cookieService.removeCookie("password");
-
-			sessionService.setSession("sessionUser", username);
-			sessionService.setSession("roleUser", user.getRole());
 		}
+
+		// Lưu thông tin người dùng vào session
+		sessionService.setSession("sessionUser", username);
+		sessionService.setSession("roleUser", user.getRole());
+		sessionService.setSession("IDUser", user.getID_User());
+
 		System.out.println("Đăng nhập thành công");
 		return "redirect:/";
 	}
@@ -82,6 +83,7 @@ public class SignIn_Controller {
 	private String logout(Model model) {
 		sessionService.removeSession("sessionUser");
 		sessionService.removeSession("roleUser");
+		sessionService.removeSession("IDUser");
 		return "redirect:/SignIn";
 	}
 }

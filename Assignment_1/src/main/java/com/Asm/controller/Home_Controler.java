@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.Asm.DAO.InvoiceDetailDAO;
+import com.Asm.DAO.InvoicesDAO;
 import com.Asm.DAO.ProductDAO;
 import com.Asm.DAO.UserDAO;
+import com.Asm.Model.InvoiceDetails;
+import com.Asm.Model.Invoices;
 import com.Asm.Model.Products;
 import com.Asm.Utils.CartService;
 import com.Asm.Utils.SessionService;
@@ -26,6 +30,12 @@ import com.Asm.Utils.SessionService;
 public class Home_Controler {
 	@Autowired
 	private ProductDAO productDAO = null;
+
+	@Autowired
+	private InvoicesDAO invoicesDAO = null;
+
+	@Autowired
+	private InvoiceDetailDAO invoiceDetailDAO = null;
 
 	private Pageable pageable = null;
 	@Autowired
@@ -43,7 +53,8 @@ public class Home_Controler {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
-		
+		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
+
 		totalProducts(model);
 		return "index";
 	}
@@ -86,7 +97,8 @@ public class Home_Controler {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
-		
+		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
+
 		totalProducts(model);
 		return "DuocMyPham";
 	}
@@ -95,7 +107,8 @@ public class Home_Controler {
 	private String contact(Model model) {
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
-		
+		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
+
 		totalProducts(model);
 		return "LienHe";
 	}
@@ -104,7 +117,8 @@ public class Home_Controler {
 	private String Checkout(Model model) {
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
-		
+		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
+
 		totalProducts(model);
 		return "Checkout";
 	}
@@ -133,7 +147,7 @@ public class Home_Controler {
 			sortOrder = Sort.by(Sort.Direction.DESC, "ProductTitle");
 			break;
 		default:
-			sortOrder = Sort.by(Sort.Direction.ASC, "ProductID");
+			sortOrder = Sort.by(Sort.Direction.DESC, "ProductID");
 			break;
 		}
 
@@ -146,7 +160,8 @@ public class Home_Controler {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
-		
+		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
+
 		totalProducts(model);
 		return "TrangDiem";
 	}
@@ -160,7 +175,8 @@ public class Home_Controler {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
-		
+		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
+
 		totalProducts(model);
 		return "ProductDetail";
 	}
@@ -170,4 +186,23 @@ public class Home_Controler {
 		model.addAttribute("sumProduct", totalProducts);
 	}
 
+	@GetMapping("/Invoice")
+	private String invoice(Model model) {
+		List<Invoices> invoices = invoicesDAO.findByIdUser(sessionService.getSession("IDUser", "IDUser"));
+		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
+
+		for (Invoices invoice : invoices) {
+			for (InvoiceDetails detail : invoice.getDetails()) {
+				Optional<Products> product = productDAO.findById(detail.getProducts().getProductID());
+				product.ifPresent(p ->  {detail.setProductName(p.getProductTitle());
+                detail.setProductPrice(p.getPrice());}
+                );
+			}
+		}
+
+		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
+		model.addAttribute("invoices", invoices);
+		return "Invoices";
+	}
 }

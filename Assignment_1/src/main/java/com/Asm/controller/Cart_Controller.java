@@ -126,7 +126,7 @@ public class Cart_Controller {
 	public String submitOrder(@RequestParam(value = "productid", required = false) Long productId,
 			@RequestParam(value = "id", required = false) Long idUser, @RequestParam("name") String name,
 			@RequestParam("phone") String phone, @RequestParam("selectedDistrict") String address,
-			@RequestParam("quantity") int quantity, @RequestParam("price") float price, Model model) {
+			@RequestParam("quantity") int quantity, @RequestParam("finallyMoney") float finallyMoney, Model model) {
 		if (productId == null) {
 			model.addAttribute("error", "Vui lòng chọn sản phẩm!");
 			return "Checkout";
@@ -144,7 +144,7 @@ public class Cart_Controller {
 			invoice.setFullname(name);
 			invoice.setPhone(phone);
 			invoice.setAddress(address);
-			invoice.setTotal(price);
+			invoice.setTotal(finallyMoney);
 			Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now());
 			invoice.setCreate_Date(currentTimestamp);
 
@@ -152,7 +152,7 @@ public class Cart_Controller {
 			cartService.clearCart();
 			if (productOptional.isPresent()) {
 				Products product = productOptional.get();
-				detailDAO.insertDetail(invoice.getID(), product.getProductID(), quantity, price);
+				detailDAO.insertDetail(invoice.getID(), product.getProductID(), quantity, finallyMoney);
 			}
 			model.addAttribute("message", "Đặt đơn thành công!");
 			model.addAttribute("IDUser", sessionService.getSession("IDUser", null));

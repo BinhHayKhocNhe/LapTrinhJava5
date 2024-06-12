@@ -98,7 +98,7 @@
 								<option disabled selected>Chọn tỉnh/thành</option>
 							</select>
 						</div>
-
+						<input type="hidden" name="kh_city" id="kh_city" value="" />
 						<div class="form-group mb-3">
 							<label for="district">Chọn quận/huyện:</label> <select
 								class="form-control form-label" name="district" id="district"
@@ -106,14 +106,14 @@
 								<option disabled selected>Chọn quận/huyện</option>
 							</select>
 						</div>
-
+						<input type="hidden" name="kh_quan" id="kh_quan" value="" />
 						<div class="form-group mb-3">
 							<label for="ward">Chọn xã/phường:</label> <select
 								class="form-control form-label" name="ward" id="ward" required>
 								<option disabled selected>Chọn xã/phường</option>
 							</select>
 						</div>
-
+						<input type="hidden" name="kh_xa" id="kh_xa" value="" />
 						<div class="form-group mb-3 ">
 							<label for="address">Đường/Hẻm/Số nhà:</label> <input type="text"
 								class="form-control form-label" id="address" name="address"
@@ -186,11 +186,21 @@
 
 					<div class="d-flex flex-column align-items-end">
 
-						<p class="mb-0">Phí vận chuyển: 0 ₫</p>
 						<p class="mb-0">
-							<input hidden type="number" class="form-control"
-								th:value="${totalAmount}" name="price"> Tổng cộng: <span
-								th:text="${#numbers.formatInteger(totalAmount, 3, 'POINT')} + ' VNĐ'"></span>
+							<a href="#">Phí ship <span id="fee_ship">0 VNĐ</span></a> <input
+								id="fee_ship_value" name="totalShip" type="hidden" value="">
+						</p>
+						<p class="mb-0">
+							<input id="priceMoney" hidden type="number" class="form-control"
+								th:value="${totalAmount}" name="priceMoney"> Giá tổng
+							sản phẩm: <span
+								th:text="${#numbers.formatInteger(totalAmount, 0, 'POINT')} + ' VNĐ'"></span>
+
+						</p>
+						<p class="mb-0">
+							<input id="finallyMoney" hidden type="number"
+								class="form-control" name="finallyMoney"> Tổng cộng: <span
+								id="textMoney"></span>
 						</p>
 						<button type="submit" formaction="/submit-order"
 							class="btn btn-primary mt-2">Đặt hàng</button>

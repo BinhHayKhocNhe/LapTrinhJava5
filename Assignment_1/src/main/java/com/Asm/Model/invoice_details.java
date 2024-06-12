@@ -16,8 +16,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "InvoiceDetails")
-public class InvoiceDetails {
+@Table(name = "invoice_details")
+public class invoice_details {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long ID;
@@ -26,6 +26,7 @@ public class InvoiceDetails {
 
 	@Transient
 	private String productName;
+
 	@Transient
     private double productPrice;
 	

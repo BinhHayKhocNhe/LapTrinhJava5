@@ -44,5 +44,5 @@ public class Invoices {
 	private Users users;
 
 	@OneToMany(mappedBy = "invoices")
-	List<InvoiceDetails> details;
+	List<invoice_details> details;
 }

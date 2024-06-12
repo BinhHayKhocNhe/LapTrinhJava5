@@ -21,7 +21,7 @@ import com.Asm.DAO.InvoiceDetailDAO;
 import com.Asm.DAO.InvoicesDAO;
 import com.Asm.DAO.ProductDAO;
 import com.Asm.DAO.UserDAO;
-import com.Asm.Model.InvoiceDetails;
+import com.Asm.Model.invoice_details;
 import com.Asm.Model.Invoices;
 
 import com.Asm.Model.Products;
@@ -206,7 +206,7 @@ public class Home_Controler {
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 
 		for (Invoices invoice : invoices) {
-			for (InvoiceDetails detail : invoice.getDetails()) {
+			for (invoice_details detail : invoice.getDetails()) {
 				Optional<Products> product = productDAO.findById(detail.getProducts().getProductID());
 				product.ifPresent(p ->  {detail.setProductName(p.getProductTitle());
                 detail.setProductPrice(p.getPrice());}
@@ -214,9 +214,11 @@ public class Home_Controler {
 			}
 		}
 
-		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
-		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
+        model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
+        model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+        model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
 		model.addAttribute("invoices", invoices);
+		totalProducts(model);
 		return "Invoices";
 	}
 }

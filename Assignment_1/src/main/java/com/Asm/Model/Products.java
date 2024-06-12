@@ -41,6 +41,6 @@ public class Products {
 	private Categories categories ;
 	
 	@OneToMany(mappedBy = "products")
-	List<InvoiceDetails> orderDetails;
+	List<invoice_details> orderDetails;
 	
 }

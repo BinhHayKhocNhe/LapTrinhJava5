@@ -1,5 +1,10 @@
 package com.Asm.controller;
 
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +23,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.Asm.DAO.UserDAO;
 import com.Asm.Model.Users;
 import com.Asm.Utils.CartService;
+import com.Asm.Utils.ExcelUtils;
 import com.Asm.Utils.SessionService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Controller
 public class User_Controller {
@@ -117,4 +126,29 @@ public class User_Controller {
 		loadUserData(model, key, p);
 		return "User";
 	}
+
+	@GetMapping(value = "/Export")
+	private String export(HttpServletRequest request, HttpServletResponse response)
+			throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		List<Users> list = dao.findAll();
+		Map<String, Object[]> userMap = new HashMap<>();
+		// Thêm hàng đầu tiên chứa tên thuộc tính
+//		userMap.put("0", new Object[] { "Username", "Password", "Fullname", "Email", "Phone" });
+
+		int index = 2;
+		for (Users item : list) {
+			userMap.put(String.valueOf(index++), new Object[] { item.getUsername(), item.getPassword(),
+					item.getFullname(), item.getEmail(), item.getPhone() });
+		}
+
+		String currentDirectory = System.getProperty("user.dir");
+		String filePath = currentDirectory + File.separator + "Export.xlsx";
+		ExcelUtils utils = new ExcelUtils();
+		utils.exportToExcel(userMap, filePath);
+
+		return "redirect:/User";
+	}
+
 }

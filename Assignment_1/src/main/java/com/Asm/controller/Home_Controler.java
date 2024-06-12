@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import com.Asm.DAO.InvoiceDetailDAO;
 import com.Asm.DAO.InvoicesDAO;
 import com.Asm.DAO.ProductDAO;
 import com.Asm.DAO.UserDAO;
 import com.Asm.Model.InvoiceDetails;
 import com.Asm.Model.Invoices;
+
 import com.Asm.Model.Products;
 import com.Asm.Utils.CartService;
 import com.Asm.Utils.SessionService;
@@ -43,6 +45,8 @@ public class Home_Controler {
 
 	@Autowired
 	private CartService cartService = null;
+
+
 
 	@GetMapping("/")
 	private String index(Model model) {
@@ -97,7 +101,9 @@ public class Home_Controler {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+
 		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
+
 
 		totalProducts(model);
 		return "DuocMyPham";
@@ -107,7 +113,9 @@ public class Home_Controler {
 	private String contact(Model model) {
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+
 		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
+
 
 		totalProducts(model);
 		return "LienHe";
@@ -117,7 +125,10 @@ public class Home_Controler {
 	private String Checkout(Model model) {
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+
 		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
+
+
 
 		totalProducts(model);
 		return "Checkout";
@@ -160,7 +171,9 @@ public class Home_Controler {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+
 		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
+
 
 		totalProducts(model);
 		return "TrangDiem";
@@ -175,6 +188,7 @@ public class Home_Controler {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+
 		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
 
 		totalProducts(model);

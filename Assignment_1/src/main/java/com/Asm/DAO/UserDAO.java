@@ -25,16 +25,23 @@ public interface UserDAO extends JpaRepository<Users, Long> {
 			+ "VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)", nativeQuery = true)
 	void addUser(String username, String password, String fullname, String email, String phone, boolean gender,
 			Date birthday, String role);
-	
+
 	@Modifying
 	@Transactional
 	@Query("UPDATE Users u SET u.Username = ?2, u.Password = ?3, u.Fullname = ?4, u.Email = ?5, "
 			+ "u.Phone = ?6, u.Gender = ?7, u.Birthday = ?8, u.Role = ?9 WHERE u.ID_User = ?1")
 	void updateUser(Long userId, String username, String password, String fullname, String email, String phone,
 			boolean gender, Date birthday, String role);
-	
-	//Tìm người dùng theo email
-	@Query(value = "SELECT * FROM Users WHERE Email LIKE ?@example.com", nativeQuery = true)
+
+	// Tìm người dùng theo email
+	@Query(value = "SELECT * FROM Users WHERE Email LIKE ?1", nativeQuery = true)
 	Users findByEmail(String email);
 
+	@Query(value = "SELECT * FROM Users WHERE Username = ?1", nativeQuery = true)
+	Users findByUsernameOrEmail(String username);
+
+	@Modifying
+	@Transactional
+	@Query(value = "UPDATE Users SET Password = ?1 WHERE Username = ?2", nativeQuery = true)
+	void forgotPassword(String password, String username);
 }

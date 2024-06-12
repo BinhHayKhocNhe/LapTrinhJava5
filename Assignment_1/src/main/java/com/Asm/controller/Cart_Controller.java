@@ -155,6 +155,7 @@ public class Cart_Controller {
 				detailDAO.insertDetail(invoice.getID(), product.getProductID(), quantity, price);
 			}
 			model.addAttribute("message", "Đặt đơn thành công!");
+			model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
 		}
 		return "Checkout";
 	}

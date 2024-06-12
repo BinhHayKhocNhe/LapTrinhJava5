@@ -11,6 +11,7 @@ import com.Asm.Model.Users;
 import com.Asm.Utils.CookieService;
 import com.Asm.Utils.SessionService;
 
+
 import java.util.Optional;
 
 @Controller
@@ -54,30 +55,26 @@ public class SignIn_Controller {
 		}
 
 		Users user = optionalUser.get();
-		
+
 		if (!user.getPassword().equals(password)) {
 			model.addAttribute("error", "Tên đăng nhập hoặc mật khẩu không đúng");
 			System.out.println("Mật khẩu không đúng");
 			return "SignIn";
 		}
 
-		if (remember == true) {
+		if (remember) {
 			cookieService.setCookie("username", username, 24);
 			cookieService.setCookie("password", password, 24);
-
-			sessionService.setSession("sessionUser", username);
-			sessionService.setSession("roleUser", user.getRole());
-			
-			sessionService.setSession("IDUser", user.getID_User());
 		} else {
 			cookieService.removeCookie("username");
 			cookieService.removeCookie("password");
-
-			sessionService.setSession("sessionUser", username);
-			sessionService.setSession("roleUser", user.getRole());
-			
-			sessionService.setSession("IDUser", user.getID_User());
 		}
+
+		// Lưu thông tin người dùng vào session
+		sessionService.setSession("sessionUser", username);
+		sessionService.setSession("roleUser", user.getRole());
+		sessionService.setSession("IDUser", user.getID_User());
+
 		System.out.println("Đăng nhập thành công");
 		return "redirect:/";
 	}

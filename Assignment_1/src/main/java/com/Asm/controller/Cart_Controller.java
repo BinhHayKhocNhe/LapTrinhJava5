@@ -4,7 +4,6 @@ import com.Asm.DAO.InvoiceDetailDAO;
 import com.Asm.DAO.InvoicesDAO;
 import com.Asm.DAO.ProductDAO;
 import com.Asm.DAO.UserDAO;
-import com.Asm.Model.InvoiceDetails;
 import com.Asm.Model.Invoices;
 import com.Asm.Model.Products;
 import com.Asm.Model.Users;
@@ -43,6 +42,7 @@ public class Cart_Controller {
 	private String views(Model model) {
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
 
 		totalProducts(model);
 		return "Cart";
@@ -55,29 +55,36 @@ public class Cart_Controller {
 
 		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
 		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
 
 		totalProducts(model);
 		return "Cart";
 	}
 
 	@GetMapping("/cart-checkout")
-	private String cartCheckout(Model model) {
-		if (!model.containsAttribute("error")) {
-			model.addAttribute("error", null); // Nếu không có lỗi, đặt giá trị là null
-		} else if (!model.containsAttribute("message")) {
-			model.addAttribute("message", null); // Nếu không có lỗi, đặt giá trị là rỗng
-		}
+    public String cartCheckout(Model model) {
+       
 
-		model.addAttribute("cartItems", cartService.getItems());
-		model.addAttribute("totalAmount", cartService.getTotalAmount());
+        // Kiểm tra và thêm thuộc tính "error" vào model nếu cần
+        if (!model.containsAttribute("error")) {
+            model.addAttribute("error", null); // Nếu không có lỗi, đặt giá trị là null
+        } else if (!model.containsAttribute("message")) {
+            model.addAttribute("message", null); // Nếu không có lỗi, đặt giá trị là rỗng
+        }
 
-		model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
-		model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
-		model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
+        // Thêm các thuộc tính khác vào model
+        model.addAttribute("cartItems", cartService.getItems());
+        model.addAttribute("totalAmount", cartService.getTotalAmount());
+        model.addAttribute("sessionUser", sessionService.getSession("sessionUser", null));
+        model.addAttribute("roleUser", sessionService.getSession("roleUser", null));
+        model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
 
-		totalProducts(model);
-		return "Checkout";
-	}
+        // Thực hiện các công việc khác nếu cần
+        totalProducts(model);
+
+        // Trả về tên của view
+        return "Checkout";
+    }
 
 	@RequestMapping(value = "/add-cart/{productId}", method = { RequestMethod.GET, RequestMethod.POST })
 	private String addToCart(@PathVariable("productId") Long productId,
@@ -119,7 +126,7 @@ public class Cart_Controller {
 	public String submitOrder(@RequestParam(value = "productid", required = false) Long productId,
 			@RequestParam(value = "id", required = false) Long idUser, @RequestParam("name") String name,
 			@RequestParam("phone") String phone, @RequestParam("selectedDistrict") String address,
-			@RequestParam("quantity") int quantity, @RequestParam("price") double price, Model model) {
+			@RequestParam("quantity") int quantity, @RequestParam("price") float price, Model model) {
 		if (productId == null) {
 			model.addAttribute("error", "Vui lòng chọn sản phẩm!");
 			return "Checkout";
@@ -137,16 +144,18 @@ public class Cart_Controller {
 			invoice.setFullname(name);
 			invoice.setPhone(phone);
 			invoice.setAddress(address);
+			invoice.setTotal(price);
 			Timestamp currentTimestamp = Timestamp.valueOf(LocalDateTime.now());
 			invoice.setCreate_Date(currentTimestamp);
 
 			invoiceDAO.save(invoice);
-
+			cartService.clearCart();
 			if (productOptional.isPresent()) {
 				Products product = productOptional.get();
 				detailDAO.insertDetail(invoice.getID(), product.getProductID(), quantity, price);
 			}
 			model.addAttribute("message", "Đặt đơn thành công!");
+			model.addAttribute("IDUser", sessionService.getSession("IDUser", null));
 		}
 		return "Checkout";
 	}

@@ -31,7 +31,7 @@ public class Invoices {
 	private Long ID;
 	private String phone;
 	private String Address;
-
+	private float Total;
 	private String Fullname;
 
 	@Temporal(TemporalType.DATE)

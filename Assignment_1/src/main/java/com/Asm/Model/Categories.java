@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 public class Categories {
 	@Id
 	private String CategoryID;
-	private String CategoryName;
+	private String Name;
 	private String Note;
 
 	@OneToMany(mappedBy = "categories")
